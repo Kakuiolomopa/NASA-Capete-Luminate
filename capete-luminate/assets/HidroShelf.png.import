@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dewiiyp74q0bd"
-path="res://.godot/imported/Salad.png-37385af09b82b6fda33fa5e43fae4642.ctex"
+uid="uid://bnyxgf3d8aa4n"
+path="res://.godot/imported/HidroShelf.png-e39e983efd1f10c32f48db2833b9d788.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Salad.png"
-dest_files=["res://.godot/imported/Salad.png-37385af09b82b6fda33fa5e43fae4642.ctex"]
+source_file="res://assets/HidroShelf.png"
+dest_files=["res://.godot/imported/HidroShelf.png-e39e983efd1f10c32f48db2833b9d788.ctex"]
 
 [params]
 

@@ -36,16 +36,16 @@ texture = ExtResource("5_bmejw")
 texture = ExtResource("6_bmejw")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ntog"]
-bg_color = Color(0.04, 0.04, 0.04, 0.23529412)
+bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.23529412)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0h3r6"]
 texture = ExtResource("8_d6fpd")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_if8o5"]
-texture = ExtResource("9_d6fpd")
+texture = ExtResource("8_d6fpd")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f0ku2"]
-texture = ExtResource("8_d6fpd")
+texture = ExtResource("9_d6fpd")
 
 [node name="MOXIE_minigame" type="CanvasLayer" unique_id=1911613002]
 script = ExtResource("1_roiqy")

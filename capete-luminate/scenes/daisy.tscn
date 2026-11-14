@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://djproy4k1io8v"]
+
+[ext_resource type="Script" uid="uid://du4swx4hopsq4" path="res://scripts/daisy.gd" id="1_weekq"]
+[ext_resource type="Texture2D" uid="uid://bfn4krgkinkms" path="res://assets/sprite/godot_sprite_sheet_centered3..png" id="2_weekq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_weekq"]
+atlas = ExtResource("2_weekq")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yv2am"]
+atlas = ExtResource("2_weekq")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyvig"]
+atlas = ExtResource("2_weekq")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0a0rv"]
+atlas = ExtResource("2_weekq")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jo7th"]
+atlas = ExtResource("2_weekq")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wthw1"]
+atlas = ExtResource("2_weekq")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_282rc"]
+atlas = ExtResource("2_weekq")
+region = Rect2(0, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wwo3"]
+atlas = ExtResource("2_weekq")
+region = Rect2(64, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkqls"]
+atlas = ExtResource("2_weekq")
+region = Rect2(128, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_er6wu"]
+atlas = ExtResource("2_weekq")
+region = Rect2(192, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6i5t"]
+atlas = ExtResource("2_weekq")
+region = Rect2(0, 64, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyer7"]
+atlas = ExtResource("2_weekq")
+region = Rect2(64, 64, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ds45f"]
+atlas = ExtResource("2_weekq")
+region = Rect2(128, 64, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jxgy"]
+atlas = ExtResource("2_weekq")
+region = Rect2(192, 64, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2daks"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_weekq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yv2am")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyvig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0a0rv")
+}],
+"loop": 1,
+"name": &"Happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_jo7th")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_wthw1")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_282rc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wwo3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkqls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_er6wu")
+}],
+"loop": 1,
+"name": &"Neutral",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6i5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyer7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ds45f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jxgy")
+}],
+"loop": 1,
+"name": &"Sad",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_knjkn"]
+radius = 42.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2daks"]
+size = Vector2(64, 30)
+
+[node name="Daisy" type="CharacterBody2D" unique_id=1120050806]
+z_index = 1
+script = ExtResource("1_weekq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1113706073]
+sprite_frames = SubResource("SpriteFrames_2daks")
+animation = &"Sad"
+autoplay = "Idle"
+frame_progress = 0.7765971
+
+[node name="DetectArea" type="Area2D" parent="." unique_id=255108310]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea" unique_id=983270689]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_knjkn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1039005940]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_2daks")

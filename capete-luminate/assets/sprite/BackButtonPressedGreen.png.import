@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1lrojblpmcno"
-path="res://.godot/imported/LettuceShelf.png-ce6fe62fc68a28aba12ef7657db94e06.ctex"
+uid="uid://cq3c2jr3hgodw"
+path="res://.godot/imported/BackButtonPressedGreen.png-41a8b05a96e4643c378de6ad283d3013.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/LettuceShelf.png"
-dest_files=["res://.godot/imported/LettuceShelf.png-ce6fe62fc68a28aba12ef7657db94e06.ctex"]
+source_file="res://assets/sprite/BackButtonPressedGreen.png"
+dest_files=["res://.godot/imported/BackButtonPressedGreen.png-41a8b05a96e4643c378de6ad283d3013.ctex"]
 
 [params]
 

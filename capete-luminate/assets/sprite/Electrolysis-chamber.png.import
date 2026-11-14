@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgxxrva45gto8"
-path="res://.godot/imported/preview.png-a680f03a9d5180282694828f1a21451f.ctex"
+uid="uid://dcw7c340xih7x"
+path="res://.godot/imported/Electrolysis-chamber.png-8883df8c47cd881811361af843cc4049.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/preview.png"
-dest_files=["res://.godot/imported/preview.png-a680f03a9d5180282694828f1a21451f.ctex"]
+source_file="res://assets/sprite/Electrolysis-chamber.png"
+dest_files=["res://.godot/imported/Electrolysis-chamber.png-8883df8c47cd881811361af843cc4049.ctex"]
 
 [params]
 

@@ -24,10 +24,10 @@ func _ready():
 		var nutrient_style = StyleBoxTexture.new()
 
 		if i != 0:
-			style.texture = load("res://assets/HidroShelf.png")
-			nutrient_style.texture = load("res://assets/nutrient_bad.png")
+			style.texture = load("res://assets/sprite/HidroShelf.png")
+			nutrient_style.texture = load("res://assets/sprite/nutrient_bad.png")
 		else:
-			style.texture = load("res://assets/HidroShelfN.png")
+			style.texture = load("res://assets/sprite/HidroShelfN.png")
 
 
 		if i != 0:
@@ -68,8 +68,8 @@ func _process(delta):
 		var nutrient = shelf.get_meta("nutrient")
 		var shelf_style = shelf.get_theme_stylebox("panel") as StyleBoxTexture
 
-		if shelf_style.texture == load("res://assets/HidroShelf.png"):
+		if shelf_style.texture == load("res://assets/sprite/HidroShelf.png"):
 			var style = StyleBoxTexture.new()
-			style.texture = load("res://assets/nutrient_bad.png")
+			style.texture = load("res://assets/sprite/nutrient_bad.png")
 			nutrient.add_theme_stylebox_override("panel", style)
 	

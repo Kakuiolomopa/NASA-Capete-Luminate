@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4eup7r24b7vn"
-path="res://.godot/imported/HidroShelf.png-e39e983efd1f10c32f48db2833b9d788.ctex"
+uid="uid://85mlr7o14eto"
+path="res://.godot/imported/BackButtonPressed.png-82f82053950d17a2bdcd6216e4f7a5f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/HidroShelf.png"
-dest_files=["res://.godot/imported/HidroShelf.png-e39e983efd1f10c32f48db2833b9d788.ctex"]
+source_file="res://assets/sprite/BackButtonPressed.png"
+dest_files=["res://.godot/imported/BackButtonPressed.png-82f82053950d17a2bdcd6216e4f7a5f5.ctex"]
 
 [params]
 

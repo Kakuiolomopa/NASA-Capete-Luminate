@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://chw8juyd71pmu"
-path="res://.godot/imported/nutrient_good.png-d058544e9d50938f3f9ef0e069c83a91.ctex"
+path="res://.godot/imported/nutrient_good.png-9d6c5b7becf1f33f487c77359daaaf61.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/nutrient_good.png"
-dest_files=["res://.godot/imported/nutrient_good.png-d058544e9d50938f3f9ef0e069c83a91.ctex"]
+source_file="res://assets/sprite/nutrient_good.png"
+dest_files=["res://.godot/imported/nutrient_good.png-9d6c5b7becf1f33f487c77359daaaf61.ctex"]
 
 [params]
 

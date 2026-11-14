@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjncu554kva8l"
-path="res://.godot/imported/BackButtonNormalGreen.png-067fe9e9ec481456dc1ad5cb250c917b.ctex"
+uid="uid://dwirscmcl5ct7"
+path="res://.godot/imported/HidroponicsColumn.png-b6407a3efac5802125d6f9f276edad87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/BackButtonNormalGreen.png"
-dest_files=["res://.godot/imported/BackButtonNormalGreen.png-067fe9e9ec481456dc1ad5cb250c917b.ctex"]
+source_file="res://assets/sprite/HidroponicsColumn.png"
+dest_files=["res://.godot/imported/HidroponicsColumn.png-b6407a3efac5802125d6f9f276edad87.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlxhou85654qn"
-path="res://.godot/imported/backButtonNormal.png-30c68ee055cfbc86f114702bb3c7755a.ctex"
+uid="uid://bwlqm275fnvjn"
+path="res://.godot/imported/ElectricalBox.png-5142af4038de4e903d1218a1166e9401.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backButtonNormal.png"
-dest_files=["res://.godot/imported/backButtonNormal.png-30c68ee055cfbc86f114702bb3c7755a.ctex"]
+source_file="res://assets/sprite/ElectricalBox.png"
+dest_files=["res://.godot/imported/ElectricalBox.png-5142af4038de4e903d1218a1166e9401.ctex"]
 
 [params]
 

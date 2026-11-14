@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bn7kdm81s6ul5"
-path="res://.godot/imported/PipeStraight.png-e4b63bb643e21962c6d53737d17166f3.ctex"
+uid="uid://d4eup7r24b7vn"
+path="res://.godot/imported/HidroShelf.png-febb09499e6234465118fcc28c5c9223.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/PipeStraight.png"
-dest_files=["res://.godot/imported/PipeStraight.png-e4b63bb643e21962c6d53737d17166f3.ctex"]
+source_file="res://assets/sprite/HidroShelf.png"
+dest_files=["res://.godot/imported/HidroShelf.png-febb09499e6234465118fcc28c5c9223.ctex"]
 
 [params]
 

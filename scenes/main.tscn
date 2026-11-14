@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://155xx7s6y6ta"]
+
+[ext_resource type="Texture2D" uid="uid://wr63cvfw01qq" path="res://assets/tilesets/Mars1.png" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://cidkyo67efp8c" path="res://scripts/main.gd" id="1_sugp2"]
+[ext_resource type="Texture2D" uid="uid://7y44rnwso8ne" path="res://assets/tilesets/Mars2.png" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://djproy4k1io8v" path="res://scenes/daisy.tscn" id="4_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://2bdof2pg837y" path="res://assets/tilesets/Blank1.png" id="4_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://c2uwyc27xfywm" path="res://assets/tilesets/Blank2.png" id="5_tipki"]
+[ext_resource type="Texture2D" uid="uid://dyy52tpsycpx2" path="res://assets/tilesets/11.png" id="6_choun"]
+[ext_resource type="Texture2D" uid="uid://co80gwuoy2b1" path="res://assets/tilesets/12.png" id="7_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://b4a2lm6hovwi2" path="res://assets/tilesets/13.png" id="8_eb6dy"]
+[ext_resource type="Texture2D" uid="uid://bvl8hhqhf7xgo" path="res://assets/tilesets/Tot.png" id="9_ya4ey"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sugp2"]
+texture = ExtResource("1_0wfyh")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tefeu"]
+texture = ExtResource("3_tbgi4")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85g3d"]
+texture = ExtResource("4_o6xl0")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_choun"]
+texture = ExtResource("5_tipki")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trceg"]
+texture = ExtResource("6_choun")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a8y0u"]
+texture = ExtResource("7_ya4ey")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jkv2x"]
+texture = ExtResource("8_eb6dy")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb6dy"]
+texture = ExtResource("9_ya4ey")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_2daks"]
+sources/0 = SubResource("TileSetAtlasSource_sugp2")
+sources/1 = SubResource("TileSetAtlasSource_tefeu")
+sources/2 = SubResource("TileSetAtlasSource_85g3d")
+sources/3 = SubResource("TileSetAtlasSource_choun")
+sources/4 = SubResource("TileSetAtlasSource_trceg")
+sources/5 = SubResource("TileSetAtlasSource_a8y0u")
+sources/6 = SubResource("TileSetAtlasSource_jkv2x")
+sources/7 = SubResource("TileSetAtlasSource_eb6dy")
+
+[node name="main" type="Node2D" unique_id=141806574]
+y_sort_enabled = true
+script = ExtResource("1_sugp2")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1301217022]
+tile_set = SubResource("TileSet_2daks")
+
+[node name="Player" parent="." unique_id=716007286 instance=ExtResource("1_o5qli")]
+position = Vector2(168, -57)
+
+[node name="Daisy" parent="." unique_id=1120050806 instance=ExtResource("4_jyhfs")]
+y_sort_enabled = true
+position = Vector2(110, -14)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1337285714]
+position = Vector2(168, -56.999985)
+scale = Vector2(9.75, 12.15625)
+texture = ExtResource("9_ya4ey")

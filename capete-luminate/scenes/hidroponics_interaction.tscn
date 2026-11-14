@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://tivfvoijrvdl"]
+
+[ext_resource type="Script" uid="uid://cs671076ui1j7" path="res://scenes/hidroponics_interaction.gd" id="1_3hjxg"]
+[ext_resource type="Texture2D" uid="uid://dgxxrva45gto8" path="res://assets/preview.png" id="1_muc17"]
+[ext_resource type="Texture2D" uid="uid://dlxhou85654qn" path="res://assets/backButtonNormal.png" id="2_3hjxg"]
+[ext_resource type="Texture2D" uid="uid://85mlr7o14eto" path="res://assets/BackButtonPressed.png" id="3_1oh1l"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_roiqy"]
+texture = ExtResource("2_3hjxg")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_44c22"]
+texture = ExtResource("3_1oh1l")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f0ku2"]
+texture = ExtResource("2_3hjxg")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbvmk"]
+bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.23529412)
+
+[node name="Hidroponics-interaction" type="CanvasLayer" unique_id=1590176310]
+script = ExtResource("1_3hjxg")
+
+[node name="Border" type="NinePatchRect" parent="." unique_id=36707997]
+z_index = 1
+offset_right = 256.0
+offset_bottom = 128.0
+scale = Vector2(5, 5)
+texture = ExtResource("1_muc17")
+draw_center = false
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="BackButton" type="Button" parent="." unique_id=522023519]
+z_index = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -90.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = 90.0
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_roiqy")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_44c22")
+theme_override_styles/hover = SubResource("StyleBoxTexture_f0ku2")
+
+[node name="Panel" type="Panel" parent="." unique_id=486970629]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lbvmk")
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

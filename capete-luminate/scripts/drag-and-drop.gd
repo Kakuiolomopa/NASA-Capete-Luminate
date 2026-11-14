@@ -1,7 +1,6 @@
 extends Panel
 
 enum Outline_type{NONE,ONE_ITEM,MULTI_ITEM}
-var texture:Texture2D = $".".texture
 var drop_place
 var initial_position:Vector2
 var mouse:bool = false
@@ -20,15 +19,13 @@ static var order_next:int = 1
 @export var meta:String
 
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	await get_tree().process_frame
 	initial_position = $".".position
 	drop_place = get_tree().get_nodes_in_group(group_accepts)
 	group_length = get_tree().get_node_count_in_group(group_accepts)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(_delta):
 	var touching = get_global_rect().has_point(get_global_mouse_position())
 	if mouse:
@@ -54,7 +51,7 @@ func _process(_delta):
 						target = target.get_meta(meta)
 					var style = StyleBoxTexture.new()
 					style.texture = texture_load
-					target.add_theme_stylebox_override("panel", style)
+					target.add_theme_stylebox_override("panel",style)
 					if order_needed:
 						order_next += 1
 					dropped = true

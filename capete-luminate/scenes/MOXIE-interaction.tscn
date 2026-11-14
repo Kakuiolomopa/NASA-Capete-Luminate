@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://be8mrlgi1qe5" path="res://scripts/moxie_interaction.gd" id="1_roiqy"]
 [ext_resource type="Texture2D" uid="uid://cmf3p3a7d63ud" path="res://assets/MOXIE.png" id="1_xq1dl"]
 [ext_resource type="Script" uid="uid://dbcbygrrb0cev" path="res://scripts/electrolysis_pos.gd" id="2_22ytx"]
+[ext_resource type="Texture2D" uid="uid://d1sy3lf20kafp" path="res://assets/bgTileHidro.png" id="2_f0ku2"]
 [ext_resource type="Texture2D" uid="uid://dcw7c340xih7x" path="res://assets/Electrolysis-chamber.png" id="2_w5eod"]
 [ext_resource type="Script" uid="uid://mjjj48ibc7n" path="res://scripts/drag-and-drop.gd" id="4_22ytx"]
 [ext_resource type="Texture2D" uid="uid://dgm3hjwk1xvic" path="res://assets/MotorCompressor.png" id="5_bmejw"]
@@ -35,9 +36,6 @@ texture = ExtResource("5_bmejw")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bmejw"]
 texture = ExtResource("6_bmejw")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ntog"]
-bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.23529412)
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0h3r6"]
 texture = ExtResource("8_d6fpd")
 
@@ -49,6 +47,16 @@ texture = ExtResource("9_d6fpd")
 
 [node name="MOXIE_minigame" type="CanvasLayer" unique_id=1911613002]
 script = ExtResource("1_roiqy")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1568331384]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_f0ku2")
+stretch_mode = 1
 
 [node name="MOXIE-interaction-area" type="PanelContainer" parent="." unique_id=2000503061]
 z_index = 1
@@ -176,19 +184,6 @@ patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
-
-[node name="Shadow" type="Panel" parent="." unique_id=734318221]
-z_index = -1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = -8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_3ntog")
 
 [node name="BackButton" type="Button" parent="." unique_id=708126351]
 anchors_preset = 1

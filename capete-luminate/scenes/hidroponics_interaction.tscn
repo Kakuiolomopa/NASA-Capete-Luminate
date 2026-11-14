@@ -1,18 +1,40 @@
 [gd_scene format=3 uid="uid://tivfvoijrvdl"]
 
-[ext_resource type="Script" uid="uid://cs671076ui1j7" path="res://scripts/hidroponics_interaction.gd" id="1_3hjxg"]
-[ext_resource type="Texture2D" uid="uid://dgxxrva45gto8" path="res://assets/preview.png" id="1_muc17"]
-[ext_resource type="Texture2D" uid="uid://dlxhou85654qn" path="res://assets/backButtonNormal.png" id="2_3hjxg"]
-[ext_resource type="Texture2D" uid="uid://85mlr7o14eto" path="res://assets/BackButtonPressed.png" id="3_1oh1l"]
+[ext_resource type="Texture2D" uid="uid://dsp5sk8iv7ci4" path="res://assets/Border_Green.png" id="1_b2xje"]
+[ext_resource type="Texture2D" uid="uid://d1sy3lf20kafp" path="res://assets/bgTileHidro.png" id="2_dvo72"]
+[ext_resource type="Texture2D" uid="uid://dw4dtlcsp3u7n" path="res://assets/Nutrients.png" id="3_5sxkl"]
 [ext_resource type="Script" uid="uid://bhclnc3fh4xnt" path="res://scripts/hidroponics-tower.gd" id="5_1oh1l"]
+[ext_resource type="Texture2D" uid="uid://chw8juyd71pmu" path="res://assets/nutrient_good.png" id="5_jkv3j"]
 [ext_resource type="Texture2D" uid="uid://iacyb41hti5g" path="res://assets/Tomato.png" id="6_qt77n"]
 [ext_resource type="Texture2D" uid="uid://lxkibooh8gns" path="res://assets/Lettuce.png" id="7_nnl6l"]
 [ext_resource type="Script" uid="uid://mjjj48ibc7n" path="res://scripts/drag-and-drop.gd" id="7_v757p"]
 [ext_resource type="Texture2D" uid="uid://y60xf47an8t3" path="res://assets/TomatoShelf.png" id="8_mgdim"]
+[ext_resource type="Texture2D" uid="uid://cq3c2jr3hgodw" path="res://assets/BackButtonPressedGreen.png" id="9_dvo72"]
 [ext_resource type="Texture2D" uid="uid://c1lrojblpmcno" path="res://assets/LettuceShelf.png" id="10_5sxkl"]
+[ext_resource type="Texture2D" uid="uid://bjncu554kva8l" path="res://assets/BackButtonNormalGreen.png" id="10_55bih"]
+[ext_resource type="Texture2D" uid="uid://dyejekoxlcb34" path="res://assets/PipeTurn.png" id="12_b2xje"]
+[ext_resource type="Texture2D" uid="uid://bn7kdm81s6ul5" path="res://assets/PipeStraight.png" id="13_b2xje"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbvmk"]
-bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.23529412)
+[sub_resource type="GDScript" id="GDScript_jkv3j"]
+script/source = "extends CanvasLayer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _on_back_button_pressed():
+	hide()
+"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lbvmk"]
+texture = ExtResource("3_5sxkl")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3ntog"]
 texture = ExtResource("6_qt77n")
@@ -21,53 +43,80 @@ texture = ExtResource("6_qt77n")
 texture = ExtResource("7_nnl6l")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1oh1l"]
-texture = ExtResource("2_3hjxg")
+texture = ExtResource("10_55bih")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qt77n"]
-texture = ExtResource("2_3hjxg")
+texture = ExtResource("10_55bih")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nnl6l"]
-texture = ExtResource("3_1oh1l")
+texture = ExtResource("9_dvo72")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dvo72"]
+texture = ExtResource("12_b2xje")
+texture_margin_left = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mbi5d"]
+texture = ExtResource("13_b2xje")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_55bih"]
+texture = ExtResource("13_b2xje")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0h3r6"]
+texture = ExtResource("13_b2xje")
 
 [node name="Hidroponics-interaction" type="CanvasLayer" unique_id=1590176310]
-script = ExtResource("1_3hjxg")
+script = SubResource("GDScript_jkv3j")
 
 [node name="Border" type="NinePatchRect" parent="." unique_id=36707997]
 z_index = 1
 offset_right = 256.0
 offset_bottom = 128.0
 scale = Vector2(5, 5)
-texture = ExtResource("1_muc17")
+texture = ExtResource("1_b2xje")
 draw_center = false
 patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
-[node name="Shadow" type="Panel" parent="." unique_id=486970629]
+[node name="Background" type="TextureRect" parent="." unique_id=1251182469]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_lbvmk")
+mouse_filter = 2
+texture = ExtResource("2_dvo72")
+stretch_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1513020179]
+[node name="Nutrients" type="PanelContainer" parent="." unique_id=153450716]
 z_index = 2
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -160.0
-offset_right = 100.0
-offset_bottom = -30.0
+offset_left = -240.0
+offset_top = -180.0
+offset_right = -160.0
+offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = -36
-script = ExtResource("5_1oh1l")
-shelf_number = 5
+
+[node name="Nutrient" type="Panel" parent="Nutrients" unique_id=1690228463]
+z_index = 2
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_lbvmk")
+script = ExtResource("7_v757p")
+group_accepts = "hidro-panels"
+texture_load = ExtResource("5_jkv3j")
+order_needed = false
+deletion_needed = false
+hide_mechanic = false
+outline_type = 2
+node_name = "Outline"
+related_to_object = true
+meta = "nutrient"
 
 [node name="PlantsContainer" type="PanelContainer" parent="." unique_id=1839787537]
 z_index = 2
@@ -83,7 +132,7 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="PlantsContainer" unique_id=86871568]
 z_index = 2
 layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 10
 
 [node name="TomatoPlant" type="Panel" parent="PlantsContainer/VBoxContainer" unique_id=808226216]
 z_index = 2
@@ -97,6 +146,9 @@ group_accepts = "hidro-panels"
 texture_load = ExtResource("8_mgdim")
 order_needed = false
 deletion_needed = false
+hide_mechanic = false
+outline_type = 2
+node_name = "Outline"
 
 [node name="Lettuce" type="Panel" parent="PlantsContainer/VBoxContainer" unique_id=186859893]
 z_index = 2
@@ -108,9 +160,11 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_v757p")
 script = ExtResource("7_v757p")
 group_accepts = "hidro-panels"
 texture_load = ExtResource("10_5sxkl")
-order = 0
 order_needed = false
 deletion_needed = false
+hide_mechanic = false
+outline_type = 2
+node_name = "Outline"
 
 [node name="BackButton" type="Button" parent="." unique_id=522023519]
 z_index = 1
@@ -125,5 +179,74 @@ grow_horizontal = 0
 theme_override_styles/normal = SubResource("StyleBoxTexture_1oh1l")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_qt77n")
 theme_override_styles/hover = SubResource("StyleBoxTexture_nnl6l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1513020179]
+z_index = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -140.0
+offset_right = 100.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 0
+script = ExtResource("5_1oh1l")
+shelf_number = 5
+
+[node name="Pipes" type="VBoxContainer" parent="." unique_id=102046957]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_top = -130.0
+offset_right = 210.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Pipe" type="Panel" parent="Pipes" unique_id=392931806]
+custom_minimum_size = Vector2(50, 60)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_dvo72")
+
+[node name="Pipe2" type="Panel" parent="Pipes" unique_id=1304795820]
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_mbi5d")
+
+[node name="Pipe3" type="Panel" parent="Pipes" unique_id=180619096]
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_mbi5d")
+
+[node name="Pipe4" type="Panel" parent="Pipes" unique_id=1860636961]
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_mbi5d")
+
+[node name="Pipe5" type="Panel" parent="Pipes" unique_id=249257920]
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_55bih")
+
+[node name="LastPipe" type="Panel" parent="." unique_id=1082060192]
+offset_left = 800.0
+offset_top = 151.0
+offset_right = 855.0
+offset_bottom = 241.0
+rotation = 1.5707964
+theme_override_styles/panel = SubResource("StyleBoxTexture_0h3r6")
 
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

@@ -53,7 +53,7 @@ func _build_data() -> Dictionary:
 	if player == null:
 		return {}
 	return {
-		"version": 2,
+		"version": 3,
 		"date": Time.get_datetime_string_from_system(false, true),
 		"play_time": play_time,
 		"quests_done": GameState.done_count(),
@@ -79,6 +79,29 @@ func _build_data() -> Dictionary:
 		"day2_stage": GameState.day2_stage,
 		"drill_repaired": GameState.drill_repaired,
 		"water_tank_repaired": GameState.water_tank_repaired,
+		"energy": GameState.energy,
+		"oxygen": GameState.oxygen,
+		"water": GameState.water,
+		"food": GameState.food,
+		"health": GameState.health,
+		"research_score": GameState.research_score,
+		"day3_complete": GameState.day3_complete,
+		"day4_complete": GameState.day4_complete,
+		"day5_complete": GameState.day5_complete,
+		"panels_cleaned": GameState.panels_cleaned,
+		"greenhouse_heated": GameState.greenhouse_heated,
+		"research_done": GameState.research_done,
+		"sent_signal": GameState.sent_signal,
+		"leak_repaired": GameState.leak_repaired,
+		"full_leak_repair": GameState.full_leak_repair,
+		"logs_found": GameState.logs_found,
+		"radiation_exposure": GameState.radiation_exposure,
+		"water_fixed": GameState.water_fixed,
+		"greenhouse_on": GameState.greenhouse_on,
+		"lab_on": GameState.lab_on,
+		"heating_on": GameState.heating_on,
+		"ship_ready": GameState.ship_ready,
+		"ending_type": GameState.ending_type,
 		"intro_done": true,
 		"player": {
 			"x": player.global_position.x,
@@ -191,6 +214,32 @@ func load_game(slot: int) -> bool:
 	GameState.drill_repaired = bool(pending_data.get("drill_repaired", false))
 	GameState.water_tank_repaired = bool(
 		pending_data.get("water_tank_repaired", false))
+	GameState.energy = int(pending_data.get("energy", 100))
+	GameState.oxygen = int(pending_data.get("oxygen", 100))
+	GameState.water = int(pending_data.get("water", 100))
+	GameState.food = int(pending_data.get("food", 100))
+	GameState.health = int(pending_data.get("health", 100))
+	GameState.research_score = int(pending_data.get("research_score", 0))
+	GameState.day3_complete = bool(pending_data.get("day3_complete", false))
+	GameState.day4_complete = bool(pending_data.get("day4_complete", false))
+	GameState.day5_complete = bool(pending_data.get("day5_complete", false))
+	GameState.panels_cleaned = bool(pending_data.get("panels_cleaned", false))
+	GameState.greenhouse_heated = bool(
+		pending_data.get("greenhouse_heated", false))
+	GameState.research_done = bool(pending_data.get("research_done", false))
+	GameState.sent_signal = bool(pending_data.get("sent_signal", false))
+	GameState.leak_repaired = bool(pending_data.get("leak_repaired", false))
+	GameState.full_leak_repair = bool(
+		pending_data.get("full_leak_repair", false))
+	GameState.logs_found = bool(pending_data.get("logs_found", false))
+	GameState.radiation_exposure = int(
+		pending_data.get("radiation_exposure", 0))
+	GameState.water_fixed = bool(pending_data.get("water_fixed", false))
+	GameState.greenhouse_on = bool(pending_data.get("greenhouse_on", true))
+	GameState.lab_on = bool(pending_data.get("lab_on", true))
+	GameState.heating_on = bool(pending_data.get("heating_on", true))
+	GameState.ship_ready = bool(pending_data.get("ship_ready", false))
+	GameState.ending_type = str(pending_data.get("ending_type", ""))
 	GameState.player_name = pending_data.get("player_name", "AGENT")
 	autosave_on_start = false
 	counting = true
@@ -243,6 +292,29 @@ func new_game(slot := -1):
 	GameState.day2_stage = 0
 	GameState.drill_repaired = false
 	GameState.water_tank_repaired = false
+	GameState.energy = 100
+	GameState.oxygen = 100
+	GameState.water = 100
+	GameState.food = 100
+	GameState.health = 100
+	GameState.research_score = 0
+	GameState.day3_complete = false
+	GameState.day4_complete = false
+	GameState.day5_complete = false
+	GameState.panels_cleaned = false
+	GameState.greenhouse_heated = false
+	GameState.research_done = false
+	GameState.sent_signal = false
+	GameState.leak_repaired = false
+	GameState.full_leak_repair = false
+	GameState.logs_found = false
+	GameState.radiation_exposure = 0
+	GameState.water_fixed = false
+	GameState.greenhouse_on = true
+	GameState.lab_on = true
+	GameState.heating_on = true
+	GameState.ship_ready = false
+	GameState.ending_type = ""
 	autosave_on_start = true
 	counting = true
 	get_tree().change_scene_to_file(NAME_SCENE)

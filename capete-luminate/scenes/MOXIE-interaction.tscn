@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dyfpy8qugniuk"]
 
-[ext_resource type="Texture2D" uid="uid://dgxxrva45gto8" path="res://assets/sprite/preview.png" id="1_klkvs"]
+[ext_resource type="Texture2D" path="res://assets/sprite/preview.png" id="1_klkvs"]
 [ext_resource type="Script" uid="uid://be8mrlgi1qe5" path="res://scripts/moxie_interaction.gd" id="1_roiqy"]
 [ext_resource type="Texture2D" uid="uid://cmf3p3a7d63ud" path="res://assets/sprite/MOXIE.png" id="1_xq1dl"]
 [ext_resource type="Script" uid="uid://dbcbygrrb0cev" path="res://scripts/electrolysis_pos.gd" id="2_22ytx"]

@@ -1,8 +1,8 @@
 extends StaticBody2D
 
-@onready var detect: Area2D = $DetectArea
 @export var to_base:bool = true
 var _player_near := false
+@onready var detect: Area2D = $DetectArea
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	detect.body_entered.connect(_on_enter)
@@ -21,10 +21,18 @@ func interact(player = null):
 		player = get_tree().get_first_node_in_group("player")
 	if player:
 		player.freeze_idle()
-		get_tree().get_first_node_in_group("fade").fade_to_black(to_base)
+		var fade = get_tree().get_first_node_in_group("fade")
+		if not to_base:
+			var outside_door = get_tree().get_first_node_in_group("outside_door")
+			if outside_door != null:
+				var marker = outside_door.get_node_or_null("OutsideMarker")
+				if marker != null:
+					GameState.outside_pos = marker.global_position
+		if fade:
+			await fade.fade_to_black(to_base)
 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass

@@ -10,6 +10,7 @@ const C_ACCENT := Color("e08a2f")
 var _font: Font
 var _objective: Label
 var _status: Label
+var _controls_panel: PanelContainer
 var _last_objective := ""
 
 
@@ -63,20 +64,31 @@ func _build_objectives():
 
 
 func _build_controls():
-	var panel := PanelContainer.new()
-	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	panel.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
-	panel.offset_left = 16
-	panel.offset_top = -150
-	panel.offset_right = 430
-	panel.offset_bottom = -12
-	panel.add_theme_stylebox_override("panel", _panel_style())
-	add_child(panel)
+	_controls_panel = PanelContainer.new()
+	_controls_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_controls_panel.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
+	_controls_panel.offset_left = 16
+	_controls_panel.offset_top = -150
+	_controls_panel.offset_right = 430
+	_controls_panel.offset_bottom = -12
+	_controls_panel.add_theme_stylebox_override("panel", _panel_style())
+	add_child(_controls_panel)
+	_controls_panel.hide()
 
 	var controls := VBoxContainer.new()
 	controls.set_script(CONTROLS_SCRIPT)
 	controls.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	panel.add_child(controls)
+	_controls_panel.add_child(controls)
+
+	var button := Button.new()
+	button.text = "TOOLS"
+	button.position = Vector2(16, 580)
+	button.size = Vector2(76, 36)
+	button.mouse_filter = Control.MOUSE_FILTER_STOP
+	button.focus_mode = Control.FOCUS_NONE
+	button.add_theme_font_size_override("font_size", 12)
+	button.pressed.connect(func(): _controls_panel.visible = not _controls_panel.visible)
+	add_child(button)
 
 
 func _refresh():

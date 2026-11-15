@@ -8,12 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://iacyb41hti5g" path="res://assets/sprite/Tomato.png" id="6_qt77n"]
 [ext_resource type="Texture2D" uid="uid://lxkibooh8gns" path="res://assets/sprite/Lettuce.png" id="7_nnl6l"]
 [ext_resource type="Script" uid="uid://mjjj48ibc7n" path="res://scripts/drag-and-drop.gd" id="7_v757p"]
-[ext_resource type="Texture2D" uid="uid://y60xf47an8t3" path="res://assets/sprite/TomatoShelf.png" id="8_mgdim"]
+[ext_resource type="Texture2D" uid="uid://doc0h7rib4egf" path="res://assets/sprite/TomatoShelf.png" id="8_mgdim"]
 [ext_resource type="Texture2D" uid="uid://cq3c2jr3hgodw" path="res://assets/sprite/BackButtonPressedGreen.png" id="9_dvo72"]
-[ext_resource type="Texture2D" uid="uid://c1lrojblpmcno" path="res://assets/sprite/LettuceShelf.png" id="10_5sxkl"]
+[ext_resource type="Texture2D" uid="uid://bo521ghrsirge" path="res://assets/sprite/LettuceShelf.png" id="10_5sxkl"]
 [ext_resource type="Texture2D" uid="uid://bjncu554kva8l" path="res://assets/sprite/BackButtonNormalGreen.png" id="10_55bih"]
 [ext_resource type="Texture2D" uid="uid://dyejekoxlcb34" path="res://assets/sprite/PipeTurn.png" id="12_b2xje"]
-[ext_resource type="Texture2D" uid="uid://ila01wtpnmit" path="res://assets/sprite/PipeStraight.png" id="13_b2xje"]
+[ext_resource type="Texture2D" uid="uid://mhvaw82nixo0" path="res://assets/sprite/PipeStraight.png" id="13_b2xje"]
 
 [sub_resource type="GDScript" id="GDScript_jkv3j"]
 script/source = "extends CanvasLayer
@@ -69,9 +69,11 @@ script = SubResource("GDScript_jkv3j")
 
 [node name="Border" type="NinePatchRect" parent="." unique_id=36707997]
 z_index = 1
-offset_right = 256.0
-offset_bottom = 128.0
-scale = Vector2(5, 5)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_b2xje")
 draw_center = false
 patch_margin_left = 6
@@ -93,13 +95,13 @@ stretch_mode = 1
 z_index = 2
 anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -240.0
-offset_top = -180.0
-offset_right = -160.0
-offset_bottom = -100.0
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = 190.0
+offset_right = -400.0
+offset_bottom = 270.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -123,10 +125,10 @@ z_index = 2
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 120.0
-offset_top = -220.0
-offset_right = 320.0
-offset_bottom = 220.0
+offset_left = -360.0
+offset_top = -140.0
+offset_right = -160.0
+offset_bottom = 260.0
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlantsContainer" unique_id=86871568]
@@ -182,15 +184,15 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_nnl6l")
 
 [node name="Tower" type="VBoxContainer" parent="." unique_id=1513020179]
 z_index = 2
-anchors_preset = 7
+anchors_preset = 4
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = -140.0
+offset_top = -260.0
 offset_right = 100.0
-offset_bottom = -30.0
+offset_bottom = 260.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 0
@@ -200,13 +202,13 @@ shelf_number = 5
 [node name="Pipes" type="VBoxContainer" parent="." unique_id=102046957]
 anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 160.0
-offset_top = -130.0
-offset_right = 210.0
-offset_bottom = -30.0
+anchor_bottom = 0.5
+offset_left = 180.0
+offset_top = -220.0
+offset_right = 230.0
+offset_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 0
@@ -243,9 +245,9 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_55bih")
 
 [node name="LastPipe" type="Panel" parent="." unique_id=1082060192]
 offset_left = 800.0
-offset_top = 151.0
+offset_top = 190.0
 offset_right = 855.0
-offset_bottom = 241.0
+offset_bottom = 280.0
 rotation = 1.5707964
 theme_override_styles/panel = SubResource("StyleBoxTexture_0h3r6")
 

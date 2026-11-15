@@ -1,18 +1,18 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3 uid="uid://lgspi1l31xeq"]
 
-[ext_resource type="Texture2D" path="res://assets/bed.png" id="1_bed"]
-[ext_resource type="Script" path="res://scripts/bed.gd" id="2_bed"]
+[ext_resource type="Texture2D" uid="uid://tl52js8o74ay" path="res://assets/bed.png" id="1_bed"]
+[ext_resource type="Script" uid="uid://djfm2mdqei5tw" path="res://scripts/bed.gd" id="2_bed"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
-size = Vector2(40, 24)
+size = Vector2(26, 41)
 
-[node name="Bed" type="StaticBody2D"]
+[node name="Bed" type="StaticBody2D" unique_id=104647152]
 script = ExtResource("2_bed")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.16, 0.16)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1532495042]
+scale = Vector2(0.11, 0.11)
 texture = ExtResource("1_bed")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 20)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=936472707]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_body")

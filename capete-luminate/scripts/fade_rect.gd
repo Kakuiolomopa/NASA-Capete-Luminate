@@ -26,6 +26,16 @@ func fade_sleep(out_time := 0.9, hold := 0.5, in_time := 0.9):
 		player.controls_enabled = true
 
 
+func fade_to_black_hold(out_time := 0.9):
+	if player:
+		player.controls_enabled = false
+	await _fade(Color.BLACK, out_time)
+
+
+func fade_from_black(in_time := 0.9):
+	await _fade(Color.TRANSPARENT, in_time)
+
+
 func fade_black_flash(out_time := 0.12, hold := 0.06, in_time := 0.2):
 	var was_enabled := true
 	if player:

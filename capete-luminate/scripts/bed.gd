@@ -190,6 +190,9 @@ func _sleep_is_objective() -> bool:
 
 
 func _first_night():
+	var fade = get_tree().get_first_node_in_group("fade")
+	if fade:
+		await fade.fade_to_black_hold()
 	await Dialogue.talk([_d(FIRST_LINE)])
 	var choice: int = await Dialogue.choose(OPTIONS)
 	GameState.first_night_choice = choice
@@ -200,13 +203,20 @@ func _first_night():
 			await Dialogue.talk([_d(ASK_LINE)])
 			await Dialogue.talk([_p(PREV_QUESTION), _d(PREV_ANSWER)])
 		await Dialogue.talk(_talk_lines())
-	await _sleep(true)
+	if fade:
+		await fade.fade_from_black()
+	await _sleep(true, true)
 
 
-func _sleep(first_night: bool):
+func _sleep(first_night: bool, already_faded := false):
 	var sleeping_day := GameState.day
 	var fade = get_tree().get_first_node_in_group("fade")
-	if fade:
+	var day2_dialogue_after_fade := not first_night and sleeping_day == 2
+	if already_faded:
+		pass
+	elif fade and day2_dialogue_after_fade:
+		await fade.fade_to_black_hold()
+	elif fade:
 		await fade.fade_sleep()
 	else:
 		await get_tree().create_timer(2.0).timeout
@@ -223,10 +233,14 @@ func _sleep(first_night: bool):
 		await Dialogue.talk(_build(DAY3_MORNING_LINES))
 	else:
 		await Dialogue.talk(_build(LATER_MORNING_LINES))
+	if fade and day2_dialogue_after_fade:
+		await fade.fade_from_black()
 
 	if SaveManager.current_slot >= 0:
 		SaveManager.save_game(SaveManager.current_slot)
 	SaveManager.save_checkpoint()
+	if sleeping_day == 2:
+		get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 
 func _talk_lines() -> Array:

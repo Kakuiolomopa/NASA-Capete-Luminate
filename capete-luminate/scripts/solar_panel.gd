@@ -33,6 +33,7 @@ var _busy := false
 func _ready():
 	add_to_group("solar_panels")
 	_unlocked = true
+	visible = true
 	_apply_texture()
 
 
@@ -55,11 +56,8 @@ func interact(player = null):
 		player.freeze_idle()
 
 	if not GameState.control_panel_booted or GameState.day1_stage < 1:
-		await Dialogue.talk([{
-			"who": GameState.player_name,
-			"text": LOCKED_LINES[0]["text"],
-			"portrait": PLAYER_PORTRAIT,
-		}])
+		await Dialogue.say(["Let's leave that for later."], GameState.player_name,
+			PLAYER_PORTRAIT)
 		_release(player)
 		return
 

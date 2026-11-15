@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://lxkibooh8gns"
-path="res://.godot/imported/Lettuce.png-6ded6f5dda885f24452756db689230c9.ctex"
+path="res://.godot/imported/Lettuce.png-7168b6a96d68886acf40aff527c4d069.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Lettuce.png"
-dest_files=["res://.godot/imported/Lettuce.png-6ded6f5dda885f24452756db689230c9.ctex"]
+source_file="res://assets/sprite/Lettuce.png"
+dest_files=["res://.godot/imported/Lettuce.png-7168b6a96d68886acf40aff527c4d069.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1sy3lf20kafp"
-path="res://.godot/imported/bgTileHidro.png-6fda3449930d753500008fa1538ce25c.ctex"
+path="res://.godot/imported/bgTileHidro.png-eefd92029dbb8da82fe70b5c3c6babb0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bgTileHidro.png"
-dest_files=["res://.godot/imported/bgTileHidro.png-6fda3449930d753500008fa1538ce25c.ctex"]
+source_file="res://assets/sprite/bgTileHidro.png"
+dest_files=["res://.godot/imported/bgTileHidro.png-eefd92029dbb8da82fe70b5c3c6babb0.ctex"]
 
 [params]
 

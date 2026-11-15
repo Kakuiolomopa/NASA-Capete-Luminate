@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwirscmcl5ct7"
-path="res://.godot/imported/HidroponicsColumn.png-4992ed9ebc9052a25a255c689e916591.ctex"
+path="res://.godot/imported/HidroponicsColumn.png-b6407a3efac5802125d6f9f276edad87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/HidroponicsColumn.png"
-dest_files=["res://.godot/imported/HidroponicsColumn.png-4992ed9ebc9052a25a255c689e916591.ctex"]
+source_file="res://assets/sprite/HidroponicsColumn.png"
+dest_files=["res://.godot/imported/HidroponicsColumn.png-b6407a3efac5802125d6f9f276edad87.ctex"]
 
 [params]
 

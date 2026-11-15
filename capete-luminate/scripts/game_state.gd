@@ -1,5 +1,6 @@
 extends Node
 
+var player_name := "AGENT"
 var quests := {}   
 var items := {}   
 

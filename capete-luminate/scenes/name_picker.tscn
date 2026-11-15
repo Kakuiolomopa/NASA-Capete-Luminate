@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c0b6gpt06cgb6"]
+
+[ext_resource type="Script" uid="uid://dlw2c5n05h3r7" path="res://scenes/name_picker.gd" id="1_46rqd"]
+
+[node name="NamePicker" type="Control" unique_id=1498951652]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_46rqd")

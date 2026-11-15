@@ -3,12 +3,16 @@ extends CanvasLayer
 signal _advance
 signal line_started(speaker: String)
 
-
+# Portrete statice (Miss M. nu e aici: are animație)
 const PORTRAITS := {
 	"egg": "res://assets/portraits/egg.jpg",
 }
 const VOICES := {}
 const VOICE_PITCH := {}
+
+const MISSM_NAME := "Miss M."
+const MISSM_FRAMES := "res://assets/portraits/missm_frames.tres"
+const MISSM_SCALE := 4
 
 const FONT_PATH := "res://assets/Silkscreen/Silkscreen-Regular.ttf"
 const FONT_SIZE := 28
@@ -20,8 +24,8 @@ const C_LINE := Color("2fe0f0")
 const C_DIM := Color("1a8a99")
 const C_TEXT := Color("bff6ff")
 
-const PX := 4           
-const CUT := 12    
+const PX := 4
+const CUT := 12
 
 var is_open := false
 var _typing := false
@@ -35,9 +39,11 @@ var _tab: Control
 var _label: Label
 var _name_label: Label
 var _face: TextureRect
+var _anim_face: AnimatedSprite2D
 var _arrow: Control
 var _blip: AudioStreamPlayer
 var _font: Font
+
 
 class PixelPanel extends Control:
 	var px := 4
@@ -75,7 +81,6 @@ class PixelPanel extends Control:
 			if xr > xl:
 				draw_rect(Rect2(xl * px, r * px, (xr - xl) * px, px), fill)
 
-
 		var m := 2
 		var a := steps + m
 		if cols > 2 * a and rows > 2 * m + 2:
@@ -96,6 +101,7 @@ func _ready():
 	_root.hide()
 
 
+# ---------- API ----------
 func say(lines: Array, speaker := "", portrait_tex: Texture2D = null):
 	var entries := []
 	for l in lines:
@@ -115,6 +121,15 @@ func talk(entries: Array):
 	is_open = false
 
 
+# ---------- Logică ----------
+func _animate_portrait(talking: bool):
+	if _speaker != MISSM_NAME or _anim_face == null or _anim_face.sprite_frames == null:
+		return
+	var anim := "talk" if talking else "idle"
+	if _anim_face.animation != anim or not _anim_face.is_playing():
+		_anim_face.play(anim)
+
+
 func _show_line(text: String):
 	line_started.emit(_speaker)
 	_label.text = text
@@ -122,6 +137,8 @@ func _show_line(text: String):
 	_arrow.hide()
 	_typing = true
 	_skip = false
+	_animate_portrait(true)
+
 	var i := 0
 	while i < text.length() and not _skip:
 		i += 1
@@ -129,8 +146,10 @@ func _show_line(text: String):
 		if i % 2 == 0 and text[i - 1] != " ":
 			_play_blip()
 		await get_tree().create_timer(CHAR_DELAY).timeout
+
 	_label.visible_characters = -1
 	_typing = false
+	_animate_portrait(false)
 	_arrow.show()
 	await _advance
 	_arrow.hide()
@@ -157,15 +176,29 @@ func _set_speaker(speaker: String, tex: Texture2D, voice: AudioStream = null):
 	_speaker = speaker
 	_tab.visible = speaker != ""
 	_name_label.text = speaker.to_upper()
-	if tex == null and PORTRAITS.has(speaker) and ResourceLoader.exists(PORTRAITS[speaker]):
-		tex = load(PORTRAITS[speaker])
-	_face.texture = tex
-	_portrait_frame.visible = tex != null
-	if voice == null and VOICES.has(speaker) and ResourceLoader.exists(VOICES[speaker]):
-		voice = load(VOICES[speaker])
+
+	var use_anim := false
+	if speaker == MISSM_NAME and ResourceLoader.exists(MISSM_FRAMES):
+		_anim_face.sprite_frames = load(MISSM_FRAMES)
+		_anim_face.play("idle")
+		use_anim = true
+	_anim_face.visible = use_anim
+
+	if not use_anim and tex == null and PORTRAITS.has(speaker):
+		if ResourceLoader.exists(PORTRAITS[speaker]):
+			tex = load(PORTRAITS[speaker])
+
+	_face.texture = null if use_anim else tex
+	_face.visible = not use_anim
+	_portrait_frame.visible = use_anim or tex != null
+
+	if voice == null and VOICES.has(speaker):
+		if ResourceLoader.exists(VOICES[speaker]):
+			voice = load(VOICES[speaker])
 	_blip.stream = voice
 
 
+# ---------- Interfață ----------
 func _style_label(l: Label, size: int):
 	l.add_theme_color_override("font_color", C_TEXT)
 	l.add_theme_font_size_override("font_size", size)
@@ -201,7 +234,7 @@ func _build():
 	var port := 188.0
 	var y := float(int((vp.y - margin - h) / PX) * PX)
 
-	# Portret (stânga)
+	# Portret
 	_portrait_frame = _panel(false, true, true, false)
 	_portrait_frame.position = Vector2(margin, y)
 	_portrait_frame.size = Vector2(port, port)
@@ -215,6 +248,14 @@ func _build():
 	_face.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	_portrait_frame.add_child(_face)
 
+	_anim_face = AnimatedSprite2D.new()
+	_anim_face.centered = true
+	_anim_face.position = Vector2(port, port) / 2.0
+	_anim_face.scale = Vector2(MISSM_SCALE, MISSM_SCALE)
+	_anim_face.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	_anim_face.hide()
+	_portrait_frame.add_child(_anim_face)
+	_portrait_frame.clip_contents = true
 	# Caseta principală
 	var bx := margin + port + 16.0
 	var bw := float(int((vp.x - bx - margin) / PX) * PX)
@@ -231,7 +272,7 @@ func _build():
 	_style_label(_label, FONT_SIZE)
 	_box.add_child(_label)
 
-	# Tab cu numele (lipit deasupra casetei)
+	# Tab nume
 	_tab = _panel(true, true, false, false, 8)
 	_tab.size = Vector2(260, 44)
 	_tab.position = Vector2(bx + 24, y - 40)
@@ -244,6 +285,7 @@ func _build():
 	_style_label(_name_label, NAME_SIZE)
 	_tab.add_child(_name_label)
 
+	# Săgeată
 	_arrow = Control.new()
 	_arrow.position = Vector2(_box.size.x - 64, _box.size.y - 60)
 	_arrow.draw.connect(func():

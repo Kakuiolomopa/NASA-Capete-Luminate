@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b5uxtj0stqtkw"]
+
+[ext_resource type="Script" uid="uid://2omou116anit" path="res://scripts/intro.gd" id="1_ioskq"]
+
+[node name="Intro" type="Control" unique_id=722141288]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ioskq")

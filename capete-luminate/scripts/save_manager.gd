@@ -1,8 +1,10 @@
 extends Node
 
+const INTRO_SCENE := "res://scenes/intro.tscn"
 const SLOTS := 3
 const SAVE_DIR := "user://saves/"
 const GAME_SCENE := "res://scenes/main.tscn"
+const NAME_SCENE := "res://scenes/name_picker.tscn"
 
 var current_slot := -1          
 var pending_data := {}          
@@ -11,7 +13,7 @@ var counting := false
 
 
 func _ready():
-	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(SAVE_DIR))
 
 
 func _process(delta):
@@ -59,6 +61,7 @@ func save_game(slot: int) -> bool:
 		"player": {
 			"x": player.global_position.x,
 			"y": player.global_position.y,
+		"player_name": GameState.player_name,
 		},
 	}
 	var f := FileAccess.open(_path(slot), FileAccess.WRITE)
@@ -88,6 +91,7 @@ func load_game(slot: int) -> bool:
 	play_time = pending_data.get("play_time", 0.0)
 	GameState.quests = pending_data.get("quests", {})
 	GameState.items = pending_data.get("items", {})
+	GameState.player_name = pending_data.get("player_name", "AGENT")
 	counting = true
 	get_tree().change_scene_to_file(GAME_SCENE)
 	return true
@@ -100,7 +104,7 @@ func new_game(slot := -1):
 	GameState.quests = {}
 	GameState.items = {}
 	counting = true
-	get_tree().change_scene_to_file(GAME_SCENE)
+	get_tree().change_scene_to_file(NAME_SCENE)
 
 
 func apply_pending(player) -> bool:

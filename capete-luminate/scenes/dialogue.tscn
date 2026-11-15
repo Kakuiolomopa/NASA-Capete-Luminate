@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bodcwmoh147n5"]
 
 [ext_resource type="Script" uid="uid://cqy6lnoqt078u" path="res://scripts/dialogue_box.gd" id="1_jwyou"]
+[ext_resource type="SpriteFrames" uid="uid://bjm6x3f6721x2" path="res://assets/portraits/missm_frames.tres" id="2_3n4vj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vidaj"]
 bg_color = Color(0, 0, 0, 1)
@@ -68,3 +69,9 @@ layout_mode = 2
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Portrait" type="AnimatedSprite2D" parent="." unique_id=487143835]
+position = Vector2(-162, 140)
+sprite_frames = ExtResource("2_3n4vj")
+animation = &"idle"
+frame_progress = 0.99560183

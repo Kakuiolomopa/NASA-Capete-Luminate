@@ -15,6 +15,8 @@ const MUSIC_PATH := "res://assets/audio/jolly_music.mp3"
 
 const BTN_SIZE := Vector2(320, 64)
 
+var _starting := false
+var _music_player: AudioStreamPlayer
 var _controls_panel: Control
 var _font: Font
 var _menu_box: VBoxContainer
@@ -94,7 +96,7 @@ func _build_main_buttons():
 		_menu_box.add_child(b)
 
 	b_load.pressed.connect(_open_load)
-	b_new.pressed.connect(func(): SaveManager.new_game())
+	b_new.pressed.connect(_start_new_game)
 	b_set.pressed.connect(_open_controls)
 	b_exit.pressed.connect(func(): get_tree().quit())
 	b_new.grab_focus()
@@ -151,14 +153,14 @@ func _refresh_slots():
 	var first: Button = null
 	for i in SaveManager.SLOTS:
 		var text := "SLOT %d - EMPTY" % (i + 1)
-		var has := SaveManager.has_save(i)
+		var has: bool = SaveManager.has_save(i)
 		if has:
-			var info := SaveManager.get_info(i)
+			var info: Dictionary = SaveManager.get_info(i)
 			text = "SLOT %d  %s  %s" % [i + 1, info["date"], SaveManager.format_time(info["play_time"])]
 		var b := _make_button(text, Vector2(560, 64))
 		b.add_theme_font_size_override("font_size", 16)
 		b.disabled = not has
-		var slot := i
+		var slot: int = i
 		b.pressed.connect(func(): SaveManager.load_game(slot))
 		_slot_box.add_child(b)
 		if has and first == null:
@@ -237,3 +239,24 @@ func _start_music():
 	p.volume_db = -6.0
 	add_child(p)
 	p.play()
+	
+func _start_new_game():
+	if _starting:
+		return
+	_starting = true
+
+	var fade := ColorRect.new()
+	fade.color = Color.BLACK
+	fade.modulate.a = 0.0
+	fade.mouse_filter = Control.MOUSE_FILTER_STOP  
+	add_child(fade)
+	fade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+
+	var t := create_tween().set_parallel(true)
+	t.tween_property(fade, "modulate:a", 1.0, 1.2)
+	if _music_player:
+		t.tween_property(_music_player, "volume_db", -40.0, 1.2)
+	await t.finished
+	await get_tree().create_timer(0.3).timeout
+
+	SaveManager.new_game()

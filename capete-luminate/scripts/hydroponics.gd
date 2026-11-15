@@ -4,6 +4,7 @@ const OVERLAY := preload("res://scenes/hidroponics_interaction.tscn")
 const TUTORIAL_STEP := 4
 const SHELF_COUNT := 5
 const SPEAKER := "D.A.I.S.Y"
+const PLAYER_PORTRAIT := preload("res://assets/portraits/portraitas.png")
 
 const EMPTY_SHELF := preload("res://assets/sprite/HidroShelf.png")
 const CROP_TEXTURES := {
@@ -83,16 +84,17 @@ func interact(player = null):
 	if player:
 		player.freeze_idle()
 	if GameState.day1_stage < 4:
-		await Dialogue.talk(_build(LOCKED_LINES))
+		await Dialogue.say(["Let's leave that for later."], GameState.player_name,
+			PLAYER_PORTRAIT)
 		_release_player()
 		_busy = false
 		return
+	_open_overlay()
 	if not GameState.hydro_intro_seen:
 		await Dialogue.talk(_build(TUTORIAL_LINES))
 		GameState.hydro_intro_seen = true
 		_save_progress()
 	GameState.story_step = maxi(GameState.story_step, TUTORIAL_STEP)
-	_open_overlay()
 
 
 func _build(src: Array) -> Array:
@@ -128,11 +130,9 @@ func _restore_shelves():
 	if tower == null:
 		return
 	var state = _station_state()
-	for i in range(tower.get_child_count()):
-		var hbox = tower.get_child(i)
-		if not (hbox is HBoxContainer):
-			continue
-		var shelf = hbox.get_node_or_null("Shelf%d" % i)
+	for i in range(SHELF_COUNT):
+		var hbox = tower.get_node_or_null("ShelfRow%d" % i)
+		var shelf = hbox.get_node_or_null("Shelf%d" % i) if hbox else null
 		if shelf == null or i == 0:
 			continue
 		var data = state[i] if i < state.size() and state[i] is Dictionary else {}
@@ -201,9 +201,15 @@ func _station_state() -> Array:
 		stored = _default_state()
 		GameState.hydro[station_id] = stored
 	var state: Array = stored
-	for i in range(state.size()):
+	while state.size() < SHELF_COUNT:
+		state.append({})
+	if state.size() > SHELF_COUNT:
+		state.resize(SHELF_COUNT)
+	for i in range(SHELF_COUNT):
 		if not (state[i] is Dictionary):
-			state[i] = {"crop": "none", "nutrient": false}
+			state[i] = {}
+		state[i]["crop"] = str(state[i].get("crop", "none"))
+		state[i]["nutrient"] = bool(state[i].get("nutrient", false))
 	return state
 
 
@@ -216,6 +222,7 @@ func _default_state() -> Array:
 
 func _on_overlay_visibility_changed():
 	if is_instance_valid(_overlay) and not _overlay.visible:
+		_save_progress()
 		_close_overlay()
 		_release_player()
 		_busy = false

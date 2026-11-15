@@ -3,27 +3,28 @@ extends Panel
 signal placed(order: int)
 signal item_dropped(item, drop_target, applied_target)
 
-enum Outline_type{NONE,ONE_ITEM,MULTI_ITEM}
-var drop_place
-var initial_position:Vector2
-var mouse:bool = false
-var group_length:int
-var target
+enum OutlineType { NONE, ONE_ITEM, MULTI_ITEM }
 @export var group_accepts:String = "electrolyzer-slot"
 @export var texture_load:Texture2D
 @export var order:int = 1
 @export var order_needed:bool = true
 @export var deletion_needed:bool = true
 @export var hide_mechanic:bool = true
-@export var outline_type:Outline_type = Outline_type.NONE
+@export var outline_type:OutlineType = OutlineType.NONE
 @export var node_name:String
 @export var related_to_object:bool = false
 @export var meta:String
+var drop_place
+var initial_global_position:Vector2
+var mouse:bool = false
+var group_length:int
+var target
 
 
 func _ready():
 	await get_tree().process_frame
-	initial_position = $".".position
+	await get_tree().process_frame
+	initial_global_position = global_position
 	drop_place = get_tree().get_nodes_in_group(group_accepts)
 	group_length = get_tree().get_node_count_in_group(group_accepts)
 	if order_needed and order <= GameState.moxie_progress():
@@ -43,7 +44,7 @@ func _process(_delta):
 	var touching = get_global_rect().has_point(get_global_mouse_position())
 	if mouse:
 		global_position = get_global_mouse_position() - size / 2
-		if outline_type == Outline_type.MULTI_ITEM:
+		if outline_type == OutlineType.MULTI_ITEM:
 			for target in drop_place:
 				var intersecting = get_global_rect().intersects(target.get_global_rect())
 				target.get_node(node_name).visible = intersecting
@@ -51,11 +52,11 @@ func _process(_delta):
 		if !mouse and touching:
 			if !order_needed or order == GameState.moxie_progress() + 1:
 				mouse = true
-				if(outline_type == Outline_type.ONE_ITEM):
+				if outline_type == OutlineType.ONE_ITEM:
 					drop_place[0].show()
 		elif mouse:
 			mouse = false
-			if outline_type == Outline_type.ONE_ITEM :
+			if outline_type == OutlineType.ONE_ITEM:
 				drop_place[0].hide()
 			var dropped = false
 			for target in drop_place:
@@ -74,16 +75,16 @@ func _process(_delta):
 						placed.emit(order)
 					item_dropped.emit(self, drop_target, target)
 					dropped = true
-					if(outline_type == Outline_type.MULTI_ITEM):
+					if outline_type == OutlineType.MULTI_ITEM:
 						for item in drop_place:
 							item.get_node(node_name).hide()
 					if deletion_needed:
 						queue_free()
 					else:
-						position = initial_position
+						global_position = initial_global_position
 					break
 			if !dropped:
-				position = initial_position
+				global_position = initial_global_position
 			else:
-				if outline_type == Outline_type.ONE_ITEM:
+				if outline_type == OutlineType.ONE_ITEM:
 					drop_place[0].show()

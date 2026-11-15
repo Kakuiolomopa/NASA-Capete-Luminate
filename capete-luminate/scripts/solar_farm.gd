@@ -9,6 +9,7 @@ const PANEL_SCENE := preload("res://scenes/solar_panel.tscn")
 
 func _ready():
 	add_to_group("solar_farm")
+	z_index = 2
 	for i in panel_count:
 		var panel = PANEL_SCENE.instantiate()
 		panel.panel_id = "solar_%d" % i

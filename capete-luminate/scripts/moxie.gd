@@ -3,6 +3,7 @@ extends StaticBody2D
 const OVERLAY := preload("res://scenes/MOXIE-interaction.tscn")
 const SOLVED_STEP := 3
 const SPEAKER := "D.A.I.S.Y"
+const PLAYER_PORTRAIT := preload("res://assets/portraits/portraitas.png")
 
 const LOCKED_LINES := [
 	{"text": "The solar array still needs cleaning. We need power before I can " +
@@ -71,7 +72,8 @@ func interact(player = null):
 	if player:
 		player.freeze_idle()
 	if not GameState.moxie_broken and GameState.day1_stage < 2:
-		await Dialogue.talk(_build(LOCKED_LINES))
+		await Dialogue.say(["Let's leave that for later."], GameState.player_name,
+			PLAYER_PORTRAIT)
 		_release_player()
 		_busy = false
 		return

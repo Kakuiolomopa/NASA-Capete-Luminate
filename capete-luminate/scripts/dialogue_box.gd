@@ -155,6 +155,10 @@ func choose(options: Array) -> int:
 	if not _choice_buttons.is_empty():
 		_choice_buttons[0].grab_focus()
 
+	# Do not let the key/click that finished the previous line
+	# immediately select the first choice.
+	await get_tree().process_frame
+	await get_tree().process_frame
 	await choice_selected
 
 	_choice_panel.hide()

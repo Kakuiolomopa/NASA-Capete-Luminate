@@ -30,6 +30,35 @@ var day2_stage := 0
 var drill_repaired := false
 var water_tank_repaired := false
 
+var energy := 100
+var oxygen := 100
+var water := 100
+var food := 100
+var health := 100
+var research_score := 0
+var day3_complete := false
+var day4_complete := false
+var day5_complete := false
+var panels_cleaned := false
+var greenhouse_heated := false
+var research_done := false
+var sent_signal := false
+var leak_repaired := false
+var full_leak_repair := false
+var logs_found := false
+var radiation_exposure := 0
+var water_fixed := false
+var greenhouse_on := true
+var lab_on := true
+var heating_on := true
+var ship_ready := false
+var ending_type := ""
+
+
+func change_resource(resource: String, amount: int):
+	set(resource, clampi(int(get(resource)), 0, 100) + amount)
+	set(resource, clampi(int(get(resource)), 0, 100))
+
 
 func done_count() -> int:
 	var n := 0

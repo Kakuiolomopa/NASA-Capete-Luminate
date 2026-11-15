@@ -11,6 +11,7 @@ size = Vector2(36, 32)
 
 [node name="SolarPanel" type="StaticBody2D"]
 script = ExtResource("2_solar")
+z_index = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_panel")

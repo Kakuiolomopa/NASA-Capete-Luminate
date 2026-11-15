@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://c1wx82lfuswqw"]
 
-[ext_resource type="Texture2D" path="res://assets/Electrolysis-chamber.png" id="1_tank"]
-[ext_resource type="Script" path="res://scripts/water_tank.gd" id="2_tank"]
+[ext_resource type="Texture2D" uid="uid://bl1xwkfhaor1o" path="res://assets/Water tank.png" id="2_e3ms2"]
+[ext_resource type="Script" uid="uid://c7p1gwoxswyn3" path="res://scripts/water_tank.gd" id="2_tank"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(32, 32)
@@ -9,16 +9,17 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_detect"]
 size = Vector2(48, 48)
 
-[node name="WaterTank" type="StaticBody2D"]
+[node name="WaterTank" type="StaticBody2D" unique_id=182763411]
 script = ExtResource("2_tank")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_tank")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=234872453]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_e3ms2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=241729585]
 shape = SubResource("RectangleShape2D_body")
 
-[node name="DetectArea" type="Area2D" parent="."]
+[node name="DetectArea" type="Area2D" parent="." unique_id=1568241384]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea" unique_id=2027761407]
 shape = SubResource("RectangleShape2D_detect")

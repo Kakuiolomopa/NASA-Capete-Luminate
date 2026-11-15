@@ -1,0 +1,204 @@
+[gd_scene format=3 uid="uid://cdgm2g38yu3kc"]
+
+[ext_resource type="Texture2D" path="res://assets/sprite/preview.png" id="1_klkvs"]
+[ext_resource type="Script" path="res://scripts/moxie_interaction.gd" id="1_roiqy"]
+[ext_resource type="Texture2D" path="res://assets/sprite/MOXIE.png" id="1_xq1dl"]
+[ext_resource type="Script" path="res://scripts/electrolysis_pos.gd" id="2_22ytx"]
+[ext_resource type="Texture2D" path="res://assets/sprite/bgTileHidro.png" id="2_f0ku2"]
+[ext_resource type="Texture2D" path="res://assets/sprite/Electrolysis-chamber.png" id="2_w5eod"]
+[ext_resource type="Script" path="res://scripts/drag-and-drop.gd" id="4_22ytx"]
+[ext_resource type="Texture2D" path="res://assets/sprite/MotorCompressor.png" id="5_bmejw"]
+[ext_resource type="Texture2D" path="res://assets/sprite/ElectricalBox.png" id="6_bmejw"]
+[ext_resource type="Texture2D" path="res://assets/sprite/backButtonNormal.png" id="8_d6fpd"]
+[ext_resource type="Texture2D" path="res://assets/sprite/BackButtonPressed.png" id="9_d6fpd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xq1dl"]
+content_margin_left = 11.0
+content_margin_top = 11.0
+content_margin_right = 11.0
+content_margin_bottom = 11.0
+texture = ExtResource("1_xq1dl")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dwp1o"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.9333334, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lbvmk"]
+texture = ExtResource("2_w5eod")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b38yj"]
+texture = ExtResource("5_bmejw")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bmejw"]
+texture = ExtResource("6_bmejw")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0h3r6"]
+texture = ExtResource("8_d6fpd")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_if8o5"]
+texture = ExtResource("8_d6fpd")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f0ku2"]
+texture = ExtResource("9_d6fpd")
+
+[node name="MOXIE_minigame" type="CanvasLayer" unique_id=1911613002]
+script = ExtResource("1_roiqy")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1568331384]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_f0ku2")
+stretch_mode = 1
+
+[node name="MOXIE-interaction-area" type="PanelContainer" parent="." unique_id=2000503061]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -160.0
+offset_right = 140.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_xq1dl")
+
+[node name="Motor-Compressor-pos" type="Panel" parent="MOXIE-interaction-area" unique_id=109619731 groups=["motor-compressor-slot"]]
+custom_minimum_size = Vector2(118, 118)
+custom_maximum_size = Vector2(180, 180)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_dwp1o")
+script = ExtResource("2_22ytx")
+
+[node name="Electrolysis-pos" type="Panel" parent="MOXIE-interaction-area" unique_id=1963903488 groups=["electrolyzer-slot"]]
+custom_minimum_size = Vector2(180, 180)
+custom_maximum_size = Vector2(180, 180)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_dwp1o")
+script = ExtResource("2_22ytx")
+group_name = "electrolyzer-slot"
+
+[node name="Electrical-pos" type="Panel" parent="MOXIE-interaction-area" unique_id=228795678 groups=["electrical-slot"]]
+custom_minimum_size = Vector2(60, 179)
+custom_maximum_size = Vector2(180, 187)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_dwp1o")
+script = ExtResource("2_22ytx")
+group_name = "electrical-slot"
+
+[node name="Items-left" type="PanelContainer" parent="." unique_id=1048478722]
+offset_left = 90.0
+offset_top = 90.0
+offset_right = 350.0
+offset_bottom = 550.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Items-left" unique_id=1878316218]
+layout_mode = 2
+
+[node name="Electrolysis-chamber" type="Panel" parent="Items-left/VBoxContainer" unique_id=411778526]
+z_index = 2
+custom_minimum_size = Vector2(130, 130)
+custom_maximum_size = Vector2(130, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxTexture_lbvmk")
+script = ExtResource("4_22ytx")
+texture_load = ExtResource("2_w5eod")
+outline_type = 1
+
+[node name="Motor-Compressor" type="Panel" parent="Items-left/VBoxContainer" unique_id=1734716209]
+z_index = 2
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxTexture_b38yj")
+script = ExtResource("4_22ytx")
+group_accepts = "motor-compressor-slot"
+texture_load = ExtResource("5_bmejw")
+order = 2
+outline_type = 1
+
+[node name="Items-right" type="PanelContainer" parent="." unique_id=899677980]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -390.0
+offset_top = 90.0
+offset_right = -130.0
+offset_bottom = 550.0
+grow_horizontal = 0
+pivot_offset = Vector2(160, 0)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Items-right" unique_id=1208250989]
+layout_mode = 2
+
+[node name="ElectricalBox" type="Panel" parent="Items-right/VBoxContainer" unique_id=172107930]
+z_index = 2
+custom_minimum_size = Vector2(40, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxTexture_bmejw")
+script = ExtResource("4_22ytx")
+group_accepts = "electrical-slot"
+texture_load = ExtResource("6_bmejw")
+order = 3
+outline_type = 1
+
+[node name="Border" type="NinePatchRect" parent="." unique_id=398931716]
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1024.0
+offset_bottom = -512.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+texture = ExtResource("1_klkvs")
+draw_center = false
+region_rect = Rect2(0, 0, 48, 20)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="BackButton" type="Button" parent="." unique_id=708126351]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -90.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = 90.0
+grow_horizontal = 0
+size_flags_horizontal = 10
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_0h3r6")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_if8o5")
+theme_override_styles/hover = SubResource("StyleBoxTexture_f0ku2")
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

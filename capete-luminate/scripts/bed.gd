@@ -177,7 +177,7 @@ func _not_ready_lines() -> Array:
 
 func _day2_not_ready_lines() -> Array:
 	if GameState.day2_stage < 1:
-		return [_d("The hydroponics tutorial is still unfinished. We need a working food system first.")]
+		return [_d("D.A.I.S.Y. needs to finish the morning briefing before we head out.")]
 	if GameState.day2_stage < 2:
 		return [_d("The drill outside still needs repair. It is our best chance of finding water.")]
 	return [_d("The water tank still needs repair. We cannot store what the drill finds without it.")]
@@ -226,6 +226,7 @@ func _sleep(first_night: bool, already_faded := false):
 		GameState.first_night_done = true
 		GameState.story_step = maxi(GameState.story_step, 5)
 		GameState.set_day1_stage(4)
+		GameState.day2_stage = 1
 		await Dialogue.talk(_build(MORNING_LINES))
 	elif sleeping_day == 2 and GameState.day2_stage >= 3:
 		await Dialogue.talk(_day2_talk_lines())

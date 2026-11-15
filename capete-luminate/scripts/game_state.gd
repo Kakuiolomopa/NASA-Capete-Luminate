@@ -1,16 +1,13 @@
 extends Node
 
+const MAX_HOURS := 8
+
 var player_name := "AGENT"
 var quests := {}
 var items := {}
 var story_step := 0
 var base_pos := Vector2.ZERO
 var outside_pos := Vector2.ZERO
-
-var hydro := {}
-var hydro_intro_seen := false
-var hydro_crop_hint := false
-var hydro_nutrient_hint := false
 
 var day := 0
 var first_night_done := false
@@ -54,10 +51,29 @@ var heating_on := true
 var ship_ready := false
 var ending_type := ""
 
+var water_efficiency := 80
+var greenhouse_health := 100
+var greenhouse_neglect := 0
+var greenhouse_fed_today := false
+var solar_efficiency := 1.0
+var panels_dirty := false
+var total_oxygen_lost := 0
+var leak_active := false
+var antenna_charged := false
+var confirmation_sent := false
+var ice_samples := false
+var antenna_hint := false
+var flags := {}
+var colony_day_settled := 0
+var hours_left := MAX_HOURS
+
 
 func change_resource(resource: String, amount: int):
+	var before := int(get(resource))
 	set(resource, clampi(int(get(resource)), 0, 100) + amount)
 	set(resource, clampi(int(get(resource)), 0, 100))
+	if resource == "oxygen" and int(get(resource)) < before:
+		total_oxygen_lost += before - int(get(resource))
 
 
 func done_count() -> int:
@@ -66,27 +82,6 @@ func done_count() -> int:
 		if quests[id] == "done":
 			n += 1
 	return n
-
-
-func hydro_station_ready(station_id: String) -> bool:
-	var shelves = hydro.get(station_id)
-	if not (shelves is Array):
-		return false
-	for shelf in shelves:
-		if not (shelf is Dictionary):
-			continue
-		var crop := str(shelf.get("crop", "none"))
-		var fed := bool(shelf.get("nutrient", false))
-		if crop != "none" and fed:
-			return true
-	return false
-
-
-func all_hydro_ready() -> bool:
-	for id in ["hydro_1", "hydro_2", "hydro_3"]:
-		if not hydro_station_ready(id):
-			return false
-	return true
 
 
 func moxie_progress() -> int:

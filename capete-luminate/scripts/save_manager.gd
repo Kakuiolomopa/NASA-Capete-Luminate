@@ -60,10 +60,6 @@ func _build_data() -> Dictionary:
 		"quests": GameState.quests,
 		"items": GameState.items,
 		"story_step": GameState.story_step,
-		"hydro": GameState.hydro,
-		"hydro_intro_seen": GameState.hydro_intro_seen,
-		"hydro_crop_hint": GameState.hydro_crop_hint,
-		"hydro_nutrient_hint": GameState.hydro_nutrient_hint,
 		"day": GameState.day,
 		"first_night_done": GameState.first_night_done,
 		"first_night_choice": GameState.first_night_choice,
@@ -102,6 +98,21 @@ func _build_data() -> Dictionary:
 		"heating_on": GameState.heating_on,
 		"ship_ready": GameState.ship_ready,
 		"ending_type": GameState.ending_type,
+		"water_efficiency": GameState.water_efficiency,
+		"greenhouse_health": GameState.greenhouse_health,
+		"greenhouse_neglect": GameState.greenhouse_neglect,
+		"greenhouse_fed_today": GameState.greenhouse_fed_today,
+		"solar_efficiency": GameState.solar_efficiency,
+		"panels_dirty": GameState.panels_dirty,
+		"total_oxygen_lost": GameState.total_oxygen_lost,
+		"leak_active": GameState.leak_active,
+		"antenna_charged": GameState.antenna_charged,
+		"confirmation_sent": GameState.confirmation_sent,
+		"ice_samples": GameState.ice_samples,
+		"antenna_hint": GameState.antenna_hint,
+		"flags": GameState.flags,
+		"colony_day_settled": GameState.colony_day_settled,
+		"hours_left": GameState.hours_left,
 		"intro_done": true,
 		"player": {
 			"x": player.global_position.x,
@@ -188,10 +199,6 @@ func load_game(slot: int) -> bool:
 	GameState.story_step = int(pending_data.get("story_step", 0))
 	if GameState.story_step == 0 and bool(pending_data.get("moxie_interacted", false)):
 		GameState.story_step = 3
-	GameState.hydro = pending_data.get("hydro", {})
-	GameState.hydro_intro_seen = bool(pending_data.get("hydro_intro_seen", false))
-	GameState.hydro_crop_hint = bool(pending_data.get("hydro_crop_hint", false))
-	GameState.hydro_nutrient_hint = bool(pending_data.get("hydro_nutrient_hint", false))
 	GameState.day = maxi(1, int(pending_data.get("day", 1)))
 	GameState.first_night_done = bool(pending_data.get("first_night_done", false))
 	GameState.first_night_choice = int(pending_data.get("first_night_choice", -1))
@@ -211,6 +218,8 @@ func load_game(slot: int) -> bool:
 	GameState.solar_task_done = bool(pending_data.get(
 		"solar_task_done", GameState.day1_stage >= 2))
 	GameState.day2_stage = int(pending_data.get("day2_stage", 0))
+	if GameState.day >= 2 and GameState.day2_stage == 0:
+		GameState.day2_stage = 1
 	GameState.drill_repaired = bool(pending_data.get("drill_repaired", false))
 	GameState.water_tank_repaired = bool(
 		pending_data.get("water_tank_repaired", false))
@@ -240,6 +249,22 @@ func load_game(slot: int) -> bool:
 	GameState.heating_on = bool(pending_data.get("heating_on", true))
 	GameState.ship_ready = bool(pending_data.get("ship_ready", false))
 	GameState.ending_type = str(pending_data.get("ending_type", ""))
+	GameState.water_efficiency = int(pending_data.get("water_efficiency", 80))
+	GameState.greenhouse_health = int(pending_data.get("greenhouse_health", 100))
+	GameState.greenhouse_neglect = int(pending_data.get("greenhouse_neglect", 0))
+	GameState.greenhouse_fed_today = bool(pending_data.get("greenhouse_fed_today", false))
+	GameState.solar_efficiency = float(pending_data.get("solar_efficiency", 1.0))
+	GameState.panels_dirty = bool(pending_data.get("panels_dirty", false))
+	GameState.total_oxygen_lost = int(pending_data.get("total_oxygen_lost", 0))
+	GameState.leak_active = bool(pending_data.get("leak_active", false))
+	GameState.antenna_charged = bool(pending_data.get("antenna_charged", false))
+	GameState.confirmation_sent = bool(pending_data.get("confirmation_sent", false))
+	GameState.ice_samples = bool(pending_data.get("ice_samples", false))
+	GameState.antenna_hint = bool(pending_data.get("antenna_hint", false))
+	var colony_flags = pending_data.get("flags", {})
+	GameState.flags = colony_flags if colony_flags is Dictionary else {}
+	GameState.colony_day_settled = int(pending_data.get("colony_day_settled", 0))
+	GameState.hours_left = clampi(int(pending_data.get("hours_left", GameState.MAX_HOURS)), 0, GameState.MAX_HOURS)
 	GameState.player_name = pending_data.get("player_name", "AGENT")
 	autosave_on_start = false
 	counting = true
@@ -273,10 +298,6 @@ func new_game(slot := -1):
 	GameState.quests = {}
 	GameState.items = {}
 	GameState.story_step = 0
-	GameState.hydro = {}
-	GameState.hydro_intro_seen = false
-	GameState.hydro_crop_hint = false
-	GameState.hydro_nutrient_hint = false
 	GameState.day = 1
 	GameState.first_night_done = false
 	GameState.first_night_choice = -1
@@ -315,6 +336,21 @@ func new_game(slot := -1):
 	GameState.heating_on = true
 	GameState.ship_ready = false
 	GameState.ending_type = ""
+	GameState.water_efficiency = 80
+	GameState.greenhouse_health = 100
+	GameState.greenhouse_neglect = 0
+	GameState.greenhouse_fed_today = false
+	GameState.solar_efficiency = 1.0
+	GameState.panels_dirty = false
+	GameState.total_oxygen_lost = 0
+	GameState.leak_active = false
+	GameState.antenna_charged = false
+	GameState.confirmation_sent = false
+	GameState.ice_samples = false
+	GameState.antenna_hint = false
+	GameState.flags = {}
+	GameState.colony_day_settled = 0
+	GameState.hours_left = GameState.MAX_HOURS
 	autosave_on_start = true
 	counting = true
 	get_tree().change_scene_to_file(NAME_SCENE)

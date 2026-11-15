@@ -48,43 +48,41 @@ func _process(_delta):
 			for target in drop_place:
 				var intersecting = get_global_rect().intersects(target.get_global_rect())
 				target.get_node(node_name).visible = intersecting
-	if Input.is_action_just_pressed("mouse_click"):
-		if !mouse and touching:
-			if !order_needed or order == GameState.moxie_progress() + 1:
-				mouse = true
-				if outline_type == OutlineType.ONE_ITEM:
-					drop_place[0].show()
-		elif mouse:
-			mouse = false
+	if Input.is_action_just_pressed("mouse_click") and not mouse and touching:
+		if not order_needed or order == GameState.moxie_progress() + 1:
+			mouse = true
 			if outline_type == OutlineType.ONE_ITEM:
-				drop_place[0].hide()
-			var dropped = false
-			for target in drop_place:
-				if get_global_rect().intersects(target.get_global_rect()):
-					var drop_target = target
-					if related_to_object:
-						target = target.get_meta(meta)
-					var style = StyleBoxTexture.new()
-					style.texture = texture_load
-					target.add_theme_stylebox_override("panel",style)
-					if order_needed:
-						if GameState.moxie_broken:
-							GameState.moxie_repair_step = maxi(GameState.moxie_repair_step, order)
-						else:
-							GameState.story_step = maxi(GameState.story_step, order)
-						placed.emit(order)
-					item_dropped.emit(self, drop_target, target)
-					dropped = true
-					if outline_type == OutlineType.MULTI_ITEM:
-						for item in drop_place:
-							item.get_node(node_name).hide()
-					if deletion_needed:
-						queue_free()
+				drop_place[0].show()
+	if Input.is_action_just_released("mouse_click") and mouse:
+		mouse = false
+		if outline_type == OutlineType.ONE_ITEM:
+			drop_place[0].hide()
+		var dropped = false
+		for target in drop_place:
+			if get_global_rect().intersects(target.get_global_rect()):
+				var drop_target = target
+				if related_to_object:
+					target = target.get_meta(meta)
+				var style = StyleBoxTexture.new()
+				style.texture = texture_load
+				target.add_theme_stylebox_override("panel", style)
+				if order_needed:
+					if GameState.moxie_broken:
+						GameState.moxie_repair_step = maxi(GameState.moxie_repair_step, order)
 					else:
-						global_position = initial_global_position
-					break
-			if !dropped:
-				global_position = initial_global_position
-			else:
-				if outline_type == OutlineType.ONE_ITEM:
-					drop_place[0].show()
+						GameState.story_step = maxi(GameState.story_step, order)
+					placed.emit(order)
+				item_dropped.emit(self, drop_target, target)
+				dropped = true
+				if outline_type == OutlineType.MULTI_ITEM:
+					for item in drop_place:
+						item.get_node(node_name).hide()
+				if deletion_needed:
+					queue_free()
+				else:
+					global_position = initial_global_position
+				break
+		if not dropped:
+			global_position = initial_global_position
+		elif outline_type == OutlineType.ONE_ITEM:
+			drop_place[0].show()

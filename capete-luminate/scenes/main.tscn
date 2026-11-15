@@ -20,7 +20,6 @@
 [ext_resource type="Script" uid="uid://drhisjvrmqmo2" path="res://scripts/base_position.gd" id="14_jkv2x"]
 [ext_resource type="Script" uid="uid://n67v155efyqb" path="res://scripts/outside_position.gd" id="15_jkv2x"]
 [ext_resource type="PackedScene" uid="uid://c3g0su41b04qx" path="res://scenes/moxie.tscn" id="16_moxie"]
-[ext_resource type="PackedScene" path="res://scenes/hydroponics.tscn" id="17_hidro"]
 [ext_resource type="PackedScene" uid="uid://lgspi1l31xeq" path="res://scenes/bed.tscn" id="18_bed"]
 [ext_resource type="Script" uid="uid://dvj46cm3lbp66" path="res://scripts/solar_farm.gd" id="19_solar"]
 [ext_resource type="PackedScene" path="res://scenes/control_panel.tscn" id="20_panel"]
@@ -3010,20 +3009,6 @@ position = Vector2(5296, 3072)
 [node name="WaterTank" parent="." unique_id=1367888062 instance=ExtResource("22_tank")]
 z_index = 2
 position = Vector2(5264, 3136)
-
-[node name="Hydroponics1" parent="." unique_id=1783336522 instance=ExtResource("17_hidro")]
-z_index = 2
-position = Vector2(5168, 3312)
-
-[node name="Hydroponics2" parent="." unique_id=1783336523 instance=ExtResource("17_hidro")]
-z_index = 2
-position = Vector2(5248, 3312)
-station_id = "hydro_2"
-
-[node name="Hydroponics3" parent="." unique_id=1783336524 instance=ExtResource("17_hidro")]
-z_index = 2
-position = Vector2(5328, 3312)
-station_id = "hydro_3"
 
 [node name="Bed" parent="." unique_id=1783336525 instance=ExtResource("18_bed")]
 z_index = 2

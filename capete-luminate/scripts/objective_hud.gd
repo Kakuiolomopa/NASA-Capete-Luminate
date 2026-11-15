@@ -113,10 +113,7 @@ func _objective_text() -> String:
 	elif GameState.day >= 2 and GameState.day2_stage < 4:
 		match GameState.day2_stage:
 			0:
-				if not GameState.all_hydro_ready():
-					text = "Complete the hydroponics tutorial."
-				else:
-					text = "Check in with D.A.I.S.Y."
+				text = "Check in with D.A.I.S.Y."
 			1:
 				text = "Repair the drill outside."
 			2:

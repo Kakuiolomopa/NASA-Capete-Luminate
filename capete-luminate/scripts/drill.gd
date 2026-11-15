@@ -4,7 +4,7 @@ const SPEAKER := "D.A.I.S.Y"
 const PLAYER_PORTRAIT := preload("res://assets/portraits/portraitas.png")
 
 const LOCKED_LINES := [
-	{"text": "The drill can wait. We need to finish the hydroponics setup first."},
+	{"text": "We need to finish the morning briefing before servicing the drill."},
 ]
 const REPAIR_LINES := [
 	{"text": "The drill is outside by the survey markers. It needs to be brought back online."},

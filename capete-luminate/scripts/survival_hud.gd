@@ -33,7 +33,8 @@ func _process(_delta):
 func _refresh():
 	if _label == null:
 		return
-	_label.text = "DAY %d\nENERGY  %3d\nOXYGEN  %3d\nWATER   %3d\nFOOD    %3d\nHEALTH  %3d" % [
+	_label.text = "DAY %d  HOURS %d/%d\nENERGY  %3d\nOXYGEN  %3d\nWATER   %3d\nFOOD    %3d" % [
 		GameState.day,
+		GameState.hours_left, GameState.MAX_HOURS,
 		GameState.energy, GameState.oxygen, GameState.water,
-		GameState.food, GameState.health]
+		GameState.food]

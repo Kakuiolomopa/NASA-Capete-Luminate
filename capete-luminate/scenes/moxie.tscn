@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c3g0su41b04qx"]
+
+[ext_resource type="Texture2D" uid="uid://drthjyc6fdn74" path="res://assets/moxieOutside.png" id="2_lvcr0"]
+[ext_resource type="Script" uid="uid://b51kmb50p8770" path="res://scripts/moxie.gd" id="2_moxie"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(24, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_detect"]
+size = Vector2(28, 22)
+
+[node name="Moxie" type="StaticBody2D" unique_id=422829090]
+script = ExtResource("2_moxie")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=345812257]
+texture = ExtResource("2_lvcr0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1892349789]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="DetectArea" type="Area2D" parent="." unique_id=232332526]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea" unique_id=1618328223]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_detect")

@@ -180,7 +180,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_1oh1l")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_qt77n")
 theme_override_styles/hover = SubResource("StyleBoxTexture_nnl6l")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1513020179]
+[node name="Tower" type="VBoxContainer" parent="." unique_id=1513020179]
 z_index = 2
 anchors_preset = 7
 anchor_left = 0.5

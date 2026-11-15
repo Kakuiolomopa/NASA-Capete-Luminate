@@ -13,6 +13,7 @@ func _ready():
 		
 
 		panel.name = "Shelf" + str(i)
+		panel.set_meta("shelf_index", i)
 		nutrient_meter.name = "Nutrient"
 		
 

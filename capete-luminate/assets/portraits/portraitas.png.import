@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmoy4pafytnsx"
-path="res://.godot/imported/egg.jpg-6effabd596cba5cbb9f9bfda4a5ff7b7.ctex"
+uid="uid://cuiflvutvrelc"
+path="res://.godot/imported/portraitas.png-10c04d7a018bfeb36dadc19f7bfd444c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/portraits/egg.jpg"
-dest_files=["res://.godot/imported/egg.jpg-6effabd596cba5cbb9f9bfda4a5ff7b7.ctex"]
+source_file="res://assets/portraits/portraitas.png"
+dest_files=["res://.godot/imported/portraitas.png-10c04d7a018bfeb36dadc19f7bfd444c.ctex"]
 
 [params]
 

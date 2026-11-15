@@ -5,13 +5,13 @@ const TUTORIAL_STEP := 4
 const SHELF_COUNT := 5
 const SPEAKER := "D.A.I.S.Y"
 
-const EMPTY_SHELF := preload("res://assets/HidroShelf.png")
+const EMPTY_SHELF := preload("res://assets/sprite/HidroShelf.png")
 const CROP_TEXTURES := {
-	"tomato": preload("res://assets/TomatoShelf.png"),
-	"lettuce": preload("res://assets/LettuceShelf.png"),
+	"tomato": preload("res://assets/sprite/TomatoShelf.png"),
+	"lettuce": preload("res://assets/sprite/LettuceShelf.png"),
 }
-const NUTRIENT_GOOD := preload("res://assets/nutrient_good.png")
-const NUTRIENT_BAD := preload("res://assets/nutrient_bad.png")
+const NUTRIENT_GOOD := preload("res://assets/sprite/nutrient_good.png")
+const NUTRIENT_BAD := preload("res://assets/sprite/nutrient_bad.png")
 
 const LOCKED_LINES := [
 	{"text": "Not today, {name}. Let's finish today's priorities first. " +

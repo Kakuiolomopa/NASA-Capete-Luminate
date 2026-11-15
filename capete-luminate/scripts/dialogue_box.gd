@@ -6,7 +6,7 @@ signal choice_selected(index: int)
 
 # Portrete statice (Miss M. nu e aici: are animație)
 const PORTRAITS := {
-	"egg": "res://assets/portraits/egg.jpg",
+	"Player": "res://assets/portraits/portraitas.png",
 	"D.A.I.S.Y":"res://assets/portraits/Daisy.png"
 }
 const VOICES := {}

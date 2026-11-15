@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 const SPEAKER := "D.A.I.S.Y"
-const PLAYER_PORTRAIT := preload("res://assets/portraits/egg.jpg")
+const PLAYER_PORTRAIT := preload("res://assets/portraits/portraitas.png")
 const DUSTY := preload("res://assets/DustyPanel.png")
 const CLEAN := preload("res://assets/Panel.png")
 

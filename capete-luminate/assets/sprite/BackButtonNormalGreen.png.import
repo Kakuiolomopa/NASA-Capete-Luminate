@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y60xf47an8t3"
-path="res://.godot/imported/TomatoShelf.png-0a2fe05194db89b22e5e394d09efa431.ctex"
+uid="uid://bjncu554kva8l"
+path="res://.godot/imported/BackButtonNormalGreen.png-47be461bca07544cd5588147a3138353.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/TomatoShelf.png"
-dest_files=["res://.godot/imported/TomatoShelf.png-0a2fe05194db89b22e5e394d09efa431.ctex"]
+source_file="res://assets/sprite/BackButtonNormalGreen.png"
+dest_files=["res://.godot/imported/BackButtonNormalGreen.png-47be461bca07544cd5588147a3138353.ctex"]
 
 [params]
 

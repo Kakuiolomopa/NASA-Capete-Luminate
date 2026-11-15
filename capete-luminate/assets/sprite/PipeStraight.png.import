@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwirscmcl5ct7"
-path="res://.godot/imported/HidroponicsColumn.png-4992ed9ebc9052a25a255c689e916591.ctex"
+uid="uid://ila01wtpnmit"
+path="res://.godot/imported/PipeStraight.png-b7a84355b9d09a43bf3bc183ce071856.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/HidroponicsColumn.png"
-dest_files=["res://.godot/imported/HidroponicsColumn.png-4992ed9ebc9052a25a255c689e916591.ctex"]
+source_file="res://assets/sprite/PipeStraight.png"
+dest_files=["res://.godot/imported/PipeStraight.png-b7a84355b9d09a43bf3bc183ce071856.ctex"]
 
 [params]
 

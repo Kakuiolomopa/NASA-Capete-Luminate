@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgm3hjwk1xvic"
-path="res://.godot/imported/MotorCompressor.png-2ba8eca3d7a1b08e674838414d7bde9f.ctex"
+uid="uid://y60xf47an8t3"
+path="res://.godot/imported/TomatoShelf.png-8b6006dfb9fef2d0ba88058e4dd27e0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/MotorCompressor.png"
-dest_files=["res://.godot/imported/MotorCompressor.png-2ba8eca3d7a1b08e674838414d7bde9f.ctex"]
+source_file="res://assets/sprite/TomatoShelf.png"
+dest_files=["res://.godot/imported/TomatoShelf.png-8b6006dfb9fef2d0ba88058e4dd27e0d.ctex"]
 
 [params]
 

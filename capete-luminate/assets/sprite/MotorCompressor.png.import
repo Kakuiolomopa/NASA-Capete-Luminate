@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcw7c340xih7x"
-path="res://.godot/imported/Electrolysis-chamber.png-c52927e27574252d1e617b4dc9edd63a.ctex"
+uid="uid://dgm3hjwk1xvic"
+path="res://.godot/imported/MotorCompressor.png-1429ce1d0a0f76b5c1ea427edd26508b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Electrolysis-chamber.png"
-dest_files=["res://.godot/imported/Electrolysis-chamber.png-c52927e27574252d1e617b4dc9edd63a.ctex"]
+source_file="res://assets/sprite/MotorCompressor.png"
+dest_files=["res://.godot/imported/MotorCompressor.png-1429ce1d0a0f76b5c1ea427edd26508b.ctex"]
 
 [params]
 

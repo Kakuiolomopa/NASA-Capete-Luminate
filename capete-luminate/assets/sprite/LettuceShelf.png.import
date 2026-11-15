@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnyxgf3d8aa4n"
-path="res://.godot/imported/HidroShelfN.png-66c9e27bd9cb967b713ccc659af62f8c.ctex"
+uid="uid://c1lrojblpmcno"
+path="res://.godot/imported/LettuceShelf.png-18ff45f82c3893fe2c93e58901fd39d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/HidroShelfN.png"
-dest_files=["res://.godot/imported/HidroShelfN.png-66c9e27bd9cb967b713ccc659af62f8c.ctex"]
+source_file="res://assets/sprite/LettuceShelf.png"
+dest_files=["res://.godot/imported/LettuceShelf.png-18ff45f82c3893fe2c93e58901fd39d7.ctex"]
 
 [params]
 

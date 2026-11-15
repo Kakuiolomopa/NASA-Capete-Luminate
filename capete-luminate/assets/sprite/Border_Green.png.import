@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmf3p3a7d63ud"
-path="res://.godot/imported/MOXIE.png-0a7c356d89b52e496b1c8fd19fd25429.ctex"
+uid="uid://dsp5sk8iv7ci4"
+path="res://.godot/imported/Border_Green.png-225807c9043d58e59b302b405e626b3c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/MOXIE.png"
-dest_files=["res://.godot/imported/MOXIE.png-0a7c356d89b52e496b1c8fd19fd25429.ctex"]
+source_file="res://assets/sprite/Border_Green.png"
+dest_files=["res://.godot/imported/Border_Green.png-225807c9043d58e59b302b405e626b3c.ctex"]
 
 [params]
 

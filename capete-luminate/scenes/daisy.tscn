@@ -1,7 +1,8 @@
-[gd_scene format=3 uid="uid://djproy4k1io8v"]
+[gd_scene format=3 uid="uid://c5ipqagbyabwg"]
 
-[ext_resource type="Script" uid="uid://du4swx4hopsq4" path="res://scripts/daisy.gd" id="1_weekq"]
-[ext_resource type="Texture2D" uid="uid://bfn4krgkinkms" path="res://assets/sprite/godot_sprite_sheet_centered3..png" id="2_weekq"]
+[ext_resource type="Script" path="res://scripts/daisy.gd" id="1_weekq"]
+[ext_resource type="Texture2D" path="res://assets/sprite/godot_sprite_sheet_centered3..png" id="2_weekq"]
+
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_weekq"]
 atlas = ExtResource("2_weekq")

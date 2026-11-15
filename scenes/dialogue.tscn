@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://bodcwmoh147n5"]
+
+[ext_resource type="Script" uid="uid://cqy6lnoqt078u" path="res://scripts/dialogue_box.gd" id="1_jwyou"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vidaj"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8784314, 0.72156864, 0.47058824, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwyou"]
+bg_color = Color(0.16470589, 0.10980392, 0.09411765, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8784314, 0.72156864, 0.47058824, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfpow"]
+bg_color = Color(0.22745098, 0.15686275, 0.1254902, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8784314, 0.72156864, 0.47058824, 1)
+
+[node name="Dialogue" type="CanvasGroup" unique_id=2017883512]
+script = ExtResource("1_jwyou")
+
+[node name="Root" type="Control" parent="." unique_id=1298057250]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Portrait" type="PanelContainer" parent="Root" unique_id=2001154082]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vidaj")
+
+[node name="Face" type="TextureRect" parent="Root/Portrait" unique_id=535320323]
+layout_mode = 2
+
+[node name="Box" type="PanelContainer" parent="Root" unique_id=1632904041]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jwyou")
+
+[node name="Text" type="RichTextLabel" parent="Root/Box" unique_id=566958777]
+layout_mode = 2
+
+[node name="NameTab" type="PanelContainer" parent="Root" unique_id=684807983]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bfpow")
+
+[node name="NameLabel" type="Label" parent="Root/NameTab" unique_id=793256366]
+layout_mode = 2
+
+[node name="Arrow" type="TextureRect" parent="Root" unique_id=1746967865]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

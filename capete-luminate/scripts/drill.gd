@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 const SPEAKER := "D.A.I.S.Y"
-const PLAYER_PORTRAIT := preload("res://assets/portraits/egg.jpg")
+const PLAYER_PORTRAIT := preload("res://assets/portraits/portraitas.png")
 
 const LOCKED_LINES := [
 	{"text": "The drill can wait. We need to finish the hydroponics setup first."},

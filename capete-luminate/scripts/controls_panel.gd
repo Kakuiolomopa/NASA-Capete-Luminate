@@ -8,6 +8,7 @@ const C_KEY := Color("e08a2f")
 const KEYS := [
 	["Move", "W A S D / Arrows"],
 	["Interact / Next", "E / Space"],
+	["Drag / place", "Mouse"],
 	["Pause menu", "Esc"],
 ]
 
@@ -15,17 +16,17 @@ var _font: Font
 
 
 func _ready():
-	add_theme_constant_override("separation", 20)
+	add_theme_constant_override("separation", 6)
 	if ResourceLoader.exists(FONT_PATH):
 		_font = load(FONT_PATH)
-	add_child(_label("CONTROLS", 32, C_LINE))
+	add_child(_label("CONTROLS", 18, C_LINE))
 	for k in KEYS:
 		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", 24)
-		var a := _label(k[0], 22, C_TEXT)
-		a.custom_minimum_size.x = 300
+		row.add_theme_constant_override("separation", 12)
+		var a := _label(k[0], 14, C_TEXT)
+		a.custom_minimum_size.x = 165
 		row.add_child(a)
-		row.add_child(_label(k[1], 22, C_KEY))
+		row.add_child(_label(k[1], 14, C_KEY))
 		add_child(row)
 
 

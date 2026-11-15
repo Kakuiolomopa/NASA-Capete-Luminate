@@ -1,12 +1,14 @@
 extends Panel
 
+signal placed(order: int)
+signal item_dropped(item, drop_target, applied_target)
+
 enum Outline_type{NONE,ONE_ITEM,MULTI_ITEM}
 var drop_place
 var initial_position:Vector2
 var mouse:bool = false
 var group_length:int
 var target
-static var order_next:int = 1
 @export var group_accepts:String = "electrolyzer-slot"
 @export var texture_load:Texture2D
 @export var order:int = 1
@@ -24,6 +26,17 @@ func _ready():
 	initial_position = $".".position
 	drop_place = get_tree().get_nodes_in_group(group_accepts)
 	group_length = get_tree().get_node_count_in_group(group_accepts)
+	if order_needed and order <= GameState.moxie_progress():
+		_restore_placed()
+
+
+func _restore_placed():
+	for target in drop_place:
+		var style = StyleBoxTexture.new()
+		style.texture = texture_load
+		target.add_theme_stylebox_override("panel", style)
+		target.show()
+	queue_free()
 
 
 func _process(_delta):
@@ -36,7 +49,7 @@ func _process(_delta):
 				target.get_node(node_name).visible = intersecting
 	if Input.is_action_just_pressed("mouse_click"):
 		if !mouse and touching:
-			if !order_needed or order == order_next:
+			if !order_needed or order == GameState.moxie_progress() + 1:
 				mouse = true
 				if(outline_type == Outline_type.ONE_ITEM):
 					drop_place[0].show()
@@ -47,13 +60,19 @@ func _process(_delta):
 			var dropped = false
 			for target in drop_place:
 				if get_global_rect().intersects(target.get_global_rect()):
+					var drop_target = target
 					if related_to_object:
 						target = target.get_meta(meta)
 					var style = StyleBoxTexture.new()
 					style.texture = texture_load
 					target.add_theme_stylebox_override("panel",style)
 					if order_needed:
-						order_next += 1
+						if GameState.moxie_broken:
+							GameState.moxie_repair_step = maxi(GameState.moxie_repair_step, order)
+						else:
+							GameState.story_step = maxi(GameState.story_step, order)
+						placed.emit(order)
+					item_dropped.emit(self, drop_target, target)
 					dropped = true
 					if(outline_type == Outline_type.MULTI_ITEM):
 						for item in drop_place:

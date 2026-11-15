@@ -1,11 +1,13 @@
 extends CanvasLayer
 
-signal _advance
+signal advance
 signal line_started(speaker: String)
+signal choice_selected(index: int)
 
 # Portrete statice (Miss M. nu e aici: are animație)
 const PORTRAITS := {
 	"egg": "res://assets/portraits/egg.jpg",
+	"D.A.I.S.Y":"res://assets/portraits/Daisy.png"
 }
 const VOICES := {}
 const VOICE_PITCH := {}
@@ -15,8 +17,8 @@ const MISSM_FRAMES := "res://assets/portraits/missm_frames.tres"
 const MISSM_SCALE := 4
 
 const FONT_PATH := "res://assets/Silkscreen/Silkscreen-Regular.ttf"
-const FONT_SIZE := 28
-const NAME_SIZE := 24
+const FONT_SIZE := 20
+const NAME_SIZE := 18
 const CHAR_DELAY := 0.03
 
 const C_BG := Color(0.02, 0.09, 0.12, 0.95)
@@ -30,6 +32,8 @@ const CUT := 12
 var is_open := false
 var _typing := false
 var _skip := false
+var _choosing := false
+var _choice_result := -1
 var _speaker := ""
 
 var _root: Control
@@ -43,6 +47,9 @@ var _anim_face: AnimatedSprite2D
 var _arrow: Control
 var _blip: AudioStreamPlayer
 var _font: Font
+var _choice_panel: PanelContainer
+var _choice_list: VBoxContainer
+var _choice_buttons: Array[Button] = []
 
 
 class PixelPanel extends Control:
@@ -121,6 +128,103 @@ func talk(entries: Array):
 	is_open = false
 
 
+func choose(options: Array) -> int:
+	await get_tree().process_frame
+	for c in _choice_list.get_children():
+		_choice_list.remove_child(c)
+		c.queue_free()
+	_choice_buttons.clear()
+	for i in options.size():
+		var button := _choice_button(str(options[i]), i)
+		_choice_list.add_child(button)
+		_choice_buttons.append(button)
+
+	var vp := get_viewport().get_visible_rect().size
+	var width := minf(vp.x - 64.0, 900.0)
+	var height := options.size() * 56.0 + 32.0
+	_choice_panel.size = Vector2(width, height)
+	_choice_panel.position = Vector2((vp.x - width) / 2.0, (vp.y - height) / 2.0)
+	_choice_result = -1
+	_choosing = true
+	is_open = true
+	_root.show()
+	_box.hide()
+	_tab.hide()
+	_arrow.hide()
+	_choice_panel.show()
+	if not _choice_buttons.is_empty():
+		_choice_buttons[0].grab_focus()
+
+	await choice_selected
+
+	_choice_panel.hide()
+	_box.show()
+	_root.hide()
+	_choosing = false
+	is_open = false
+	return _choice_result
+
+
+func _choice_button(text: String, index: int) -> Button:
+	var button := Button.new()
+	button.text = text
+	button.custom_minimum_size = Vector2(0, 48)
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button.add_theme_font_size_override("font_size", 20)
+	button.add_theme_color_override("font_color", C_TEXT)
+	button.add_theme_color_override("font_hover_color", Color.WHITE)
+	button.add_theme_color_override("font_focus_color", Color.WHITE)
+	button.add_theme_color_override("font_pressed_color", Color.WHITE)
+	if _font:
+		button.add_theme_font_override("font", _font)
+
+	var normal := StyleBoxFlat.new()
+	normal.bg_color = Color(0.02, 0.07, 0.1, 0.95)
+	normal.set_border_width_all(2)
+	normal.border_color = C_DIM
+	normal.set_content_margin_all(10)
+
+	var focus := normal.duplicate()
+	focus.bg_color = Color(0.5, 0.28, 0.08, 0.95)
+	focus.border_color = C_LINE
+
+	button.add_theme_stylebox_override("normal", normal)
+	button.add_theme_stylebox_override("hover", focus)
+	button.add_theme_stylebox_override("focus", focus)
+	button.add_theme_stylebox_override("pressed", focus)
+	button.pressed.connect(func(): _select_choice(index))
+	return button
+
+
+func _select_choice(index: int):
+	if not _choosing:
+		return
+	_choice_result = index
+	choice_selected.emit(index)
+
+
+func _move_choice(step: int):
+	if _choice_buttons.is_empty():
+		return
+	var current := 0
+	for i in _choice_buttons.size():
+		if _choice_buttons[i].has_focus():
+			current = i
+			break
+	current = (current + step + _choice_buttons.size()) % _choice_buttons.size()
+	_choice_buttons[current].grab_focus()
+
+
+func _activate_choice():
+	if _choice_buttons.is_empty():
+		return
+	for i in _choice_buttons.size():
+		if _choice_buttons[i].has_focus():
+			_select_choice(i)
+			return
+	_select_choice(0)
+
+
 # ---------- Logică ----------
 func _animate_portrait(talking: bool):
 	if _speaker != MISSM_NAME or _anim_face == null or _anim_face.sprite_frames == null:
@@ -133,6 +237,7 @@ func _animate_portrait(talking: bool):
 func _show_line(text: String):
 	line_started.emit(_speaker)
 	_label.text = text
+	_fit_text_to_box(text)
 	_label.visible_characters = 0
 	_arrow.hide()
 	_typing = true
@@ -151,8 +256,22 @@ func _show_line(text: String):
 	_typing = false
 	_animate_portrait(false)
 	_arrow.show()
-	await _advance
+	await advance
 	_arrow.hide()
+
+
+func _fit_text_to_box(text: String):
+	_label.add_theme_font_size_override("font_size", FONT_SIZE)
+	if _font == null:
+		return
+	var size := FONT_SIZE
+	while size > 14:
+		var measured := _font.get_multiline_string_size(
+			text, HORIZONTAL_ALIGNMENT_LEFT, _label.size.x, size)
+		if measured.y <= _label.size.y:
+			break
+		size -= 1
+	_label.add_theme_font_size_override("font_size", size)
 
 
 func _play_blip():
@@ -162,14 +281,28 @@ func _play_blip():
 	_blip.play()
 
 
+func _input(event):
+	if not _choosing:
+		return
+	if event.is_action_pressed("Up") or event.is_action_pressed("ui_up"):
+		_move_choice(-1)
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("Down") or event.is_action_pressed("ui_down"):
+		_move_choice(1)
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("interact") or event.is_action_pressed("ui_accept"):
+		_activate_choice()
+		get_viewport().set_input_as_handled()
+
+
 func _unhandled_input(event):
-	if not is_open or not event.is_action_pressed("interact"):
+	if _choosing or not is_open or not event.is_action_pressed("interact"):
 		return
 	get_viewport().set_input_as_handled()
 	if _typing:
 		_skip = true
 	else:
-		_advance.emit()
+		advance.emit()
 
 
 func _set_speaker(speaker: String, tex: Texture2D, voice: AudioStream = null):
@@ -230,8 +363,8 @@ func _build():
 
 	var vp := get_viewport().get_visible_rect().size
 	var margin := 32.0
-	var h := 188.0
-	var port := 188.0
+	var h := 176.0
+	var port := 176.0
 	var y := float(int((vp.y - margin - h) / PX) * PX)
 
 	# Portret
@@ -265,22 +398,23 @@ func _build():
 	_root.add_child(_box)
 
 	_label = Label.new()
-	_label.position = Vector2(32, 24)
-	_label.size = _box.size - Vector2(64, 48)
+	_label.position = Vector2(24, 20)
+	_label.size = _box.size - Vector2(48, 40)
 	_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	_label.clip_text = true
 	_style_label(_label, FONT_SIZE)
 	_box.add_child(_label)
 
 	# Tab nume
 	_tab = _panel(true, true, false, false, 8)
-	_tab.size = Vector2(260, 44)
+	_tab.size = Vector2(220, 38)
 	_tab.position = Vector2(bx + 24, y - 40)
 	_root.add_child(_tab)
 
 	_name_label = Label.new()
-	_name_label.position = Vector2(20, 4)
-	_name_label.size = Vector2(230, 32)
+	_name_label.position = Vector2(16, 3)
+	_name_label.size = Vector2(190, 30)
 	_name_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_style_label(_name_label, NAME_SIZE)
 	_tab.add_child(_name_label)
@@ -298,3 +432,18 @@ func _build():
 	var bounce := create_tween().set_loops()
 	bounce.tween_property(_arrow, "position:y", _arrow.position.y + 4, 0.4)
 	bounce.tween_property(_arrow, "position:y", _arrow.position.y, 0.4)
+
+	_choice_panel = PanelContainer.new()
+	var choice_style := StyleBoxFlat.new()
+	choice_style.bg_color = C_BG
+	choice_style.set_border_width_all(4)
+	choice_style.border_color = C_LINE
+	choice_style.set_content_margin_all(16)
+	_choice_panel.add_theme_stylebox_override("panel", choice_style)
+	_choice_panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	_choice_panel.hide()
+	_root.add_child(_choice_panel)
+
+	_choice_list = VBoxContainer.new()
+	_choice_list.add_theme_constant_override("separation", 8)
+	_choice_panel.add_child(_choice_list)
